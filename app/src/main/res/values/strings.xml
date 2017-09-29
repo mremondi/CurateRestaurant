@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Curate</string>
+    <string name="drawer_open">OPEN</string>
+    <string name="drawer_close">CLOSED</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fragment_names">
+        <item>Order Queue</item>
+        <item>Manage Menu</item>
+        <item>Past Orders</item>
+        <item>Customer Support</item>
+    </string-array>
+</resources>

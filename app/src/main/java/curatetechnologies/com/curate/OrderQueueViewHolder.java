@@ -15,6 +15,7 @@ public class OrderQueueViewHolder extends RecyclerView.ViewHolder {
     private final TextView userName;
     private final TextView itemPrice;
     private final Button btnAcceptOrder;
+    private final Button btnRejectOrder;
 
     public OrderQueueViewHolder(View itemView) {
         super(itemView);
@@ -22,6 +23,22 @@ public class OrderQueueViewHolder extends RecyclerView.ViewHolder {
         userName = (TextView) itemView.findViewById(R.id.order_row_user_name);
         itemPrice = (TextView) itemView.findViewById(R.id.order_row_item_price);
         btnAcceptOrder = (Button) itemView.findViewById(R.id.order_row_accept_button);
+        btnRejectOrder = (Button) itemView.findViewById(R.id.order_row_reject_button);
+
+        btnAcceptOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("clicked accept");
+            }
+        });
+
+        btnRejectOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("clicked reject");
+            }
+        });
+
     }
 
     public void setItemName(String name) {

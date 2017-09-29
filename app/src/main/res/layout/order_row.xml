@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp">
 
     <TextView
         android:id="@+id/order_row_item_name"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"/>
 
     <TextView
         android:id="@+id/order_row_user_name"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignRight="@+id/order_row_item_name"/>
 
 
     <TextView
         android:id="@+id/order_row_item_price"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignRight="@+id/order_row_user_name"/>
+
+
+
+    <Button
+        android:id="@+id/order_row_reject_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Reject"
+        android:layout_alignParentRight="true"/>
 
     <Button
         android:id="@+id/order_row_accept_button"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="Accept"
+        android:layout_alignLeft="@+id/order_row_reject_button"/>
 
-</LinearLayout>
+</RelativeLayout>
