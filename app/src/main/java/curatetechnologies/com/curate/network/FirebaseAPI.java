@@ -14,4 +14,8 @@ public enum FirebaseAPI {
     public DatabaseReference getOrderQueueRef(){
         return FirebaseDatabase.getInstance().getReference().child("order_queue");
     }
+
+    public DatabaseReference getOrderItemsRef(DatabaseReference orderRef){
+        return orderRef.child("order_items");
+    }
 }

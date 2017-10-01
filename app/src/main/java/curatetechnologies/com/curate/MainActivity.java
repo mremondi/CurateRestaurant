@@ -12,13 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import curatetechnologies.com.curate.controllers.OrderQueue;
+import curatetechnologies.com.curate.controllers.NewOrderQueue;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -42,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Fragment orderQueue = new OrderQueue();
+        Fragment orderQueue = new NewOrderQueue();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.content_frame, orderQueue);
@@ -86,6 +81,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        if (id == R.id.order_queue){
+            Fragment orderQueue = new NewOrderQueue();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(R.id.content_frame, orderQueue);
+            transaction.commit();
+        }
 
 //        if (id == R.id.nav_camera) {
 //            // Handle the camera action

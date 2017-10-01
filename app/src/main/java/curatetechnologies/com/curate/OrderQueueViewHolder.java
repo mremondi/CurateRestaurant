@@ -2,7 +2,6 @@ package curatetechnologies.com.curate;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -11,47 +10,40 @@ import android.widget.TextView;
 
 public class OrderQueueViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView itemName;
     private final TextView userName;
-    private final TextView itemPrice;
-    private final Button btnAcceptOrder;
-    private final Button btnRejectOrder;
+    private final TextView orderPrice;
 
-    public OrderQueueViewHolder(View itemView) {
+
+    public OrderQueueViewHolder(final View itemView) {
         super(itemView);
-        itemName = (TextView) itemView.findViewById(R.id.order_row_item_name);
         userName = (TextView) itemView.findViewById(R.id.order_row_user_name);
-        itemPrice = (TextView) itemView.findViewById(R.id.order_row_item_price);
-        btnAcceptOrder = (Button) itemView.findViewById(R.id.order_row_accept_button);
-        btnRejectOrder = (Button) itemView.findViewById(R.id.order_row_reject_button);
+        orderPrice = (TextView) itemView.findViewById(R.id.order_row_price);
 
-        btnAcceptOrder.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("clicked accept");
-            }
-        });
-
-        btnRejectOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("clicked reject");
+                mClickListener.onItemClick(view, getAdapterPosition());
             }
         });
 
     }
 
-    public void setItemName(String name) {
-        this.itemName.setText(name);
+    private OrderQueueViewHolder.ClickListener mClickListener;
+
+    public interface ClickListener{
+        public void onItemClick(View view, int position);
+    }
+
+    public void setOnClickListener(OrderQueueViewHolder.ClickListener clickListener){
+        mClickListener = clickListener;
     }
 
     public void setUserName(String userName){
         this.userName.setText(userName);
     }
 
-    public void setItemPrice(String price){
-        this.itemPrice.setText(price);
+    public void setOrderPrice(String price){
+        this.orderPrice.setText("$" + price);
     }
 
-    // TODO: hook up button to firebase
 }
