@@ -21,6 +21,10 @@ public enum FirebaseAPI {
         return FirebaseDatabase.getInstance().getReference().child("current_orders");
     }
 
+    public DatabaseReference getCompletedOrdersRef(){
+        return FirebaseDatabase.getInstance().getReference().child("completed_orders");
+    }
+
     public DatabaseReference getOrderItemsRef(DatabaseReference orderRef){
         return orderRef.child("order_items");
     }
@@ -31,5 +35,12 @@ public enum FirebaseAPI {
 
         //orderRef.removeValue();
 
+    }
+
+    public void moveCurrentOrderToCompletedOrders(DatabaseReference orderRef, Order order){
+        DatabaseReference newRef = getCompletedOrdersRef();
+        newRef.child(orderRef.getKey()).setValue(order);
+
+        //orderRef.removeValue();
     }
 }

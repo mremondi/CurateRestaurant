@@ -13,12 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import curatetechnologies.com.curate.controllers.CompletedOrders;
 import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
+import curatetechnologies.com.curate.controllers.ManageMenu;
 import curatetechnologies.com.curate.controllers.NewOrderQueue;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,24 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.drawer_view, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -82,35 +65,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
 
         if (id == R.id.order_queue){
-            Fragment orderQueue = new NewOrderQueue();
-            FragmentManager fm = getFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            transaction.replace(R.id.content_frame, orderQueue);
-            transaction.commit();
+            fragment =  new NewOrderQueue();
         }
         else if (id == R.id.current_orders){
-            Fragment orderQueue = new CurrentOrderQueue();
+            fragment = new CurrentOrderQueue();
+        }
+        else if (id == R.id.completed_orders){
+            fragment = new CompletedOrders();
+        }
+        else if (id == R.id.manage_menu){
+            fragment = new ManageMenu();
+        }
+        if (fragment != null) {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction transaction = fm.beginTransaction();
-            transaction.replace(R.id.content_frame, orderQueue);
+            transaction.replace(R.id.content_frame, fragment);
             transaction.commit();
         }
-
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//            Toast.makeText(MainActivity.this, "GALLERY", Toast.LENGTH_SHORT).show();
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

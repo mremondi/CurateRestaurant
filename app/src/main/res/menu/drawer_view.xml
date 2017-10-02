@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<group android:checkableBehavior="single">
-    <item
-        android:id="@+id/order_queue"
-        android:icon="@drawable/ic_list_white_24dp"
-        android:title="New Orders"
-        android:checked="true"/>
-    <item
-        android:id="@+id/current_orders"
-        android:icon="@drawable/ic_alarm_white_24dp"
-        android:title="Current Orders"
-        android:checked="true"/>
-    <item
-        android:id="@+id/completed_orders"
-        android:icon="@drawable/ic_playlist_add_check_white_24dp"
-        android:title="Completed Orders"
-        android:checked="true"/>
-    <!--<item-->
-        <!--android:id="@+id/nav_second_fragment"-->
-        <!--android:icon="@drawable/ic_list_white_24dp"-->
-        <!--android:title="Second" />-->
-    <!--<item-->
-        <!--android:id="@+id/nav_third_fragment"-->
-        <!--android:icon="@drawable/ic_list_white_24dp"-->
-        <!--android:title="Third" />-->
-</group>
+    <group android:id="@+id/top_menu" android:checkableBehavior="single">
+        <item
+            android:id="@+id/order_queue"
+            android:icon="@drawable/ic_list_white_24dp"
+            android:title="New Orders"
+            android:checked="true"/>
+        <item
+            android:id="@+id/current_orders"
+            android:icon="@drawable/ic_alarm_white_24dp"
+            android:title="Current Orders"/>
+        <item
+            android:id="@+id/completed_orders"
+            android:icon="@drawable/ic_playlist_add_check_white_24dp"
+            android:title="Completed Orders"/>
+
+        <item
+            android:id="@+id/manage_menu"
+            android:icon="@drawable/ic_menu_white_24dp"
+            android:title="Manage Menu" />
+
+    </group>
+    <group
+        android:id="@+id/bottom_menu" android:checkableBehavior="single">
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="Settings"/>
+
+        <item
+            android:id="@+id/contact_us"
+            android:icon="@drawable/ic_phone_white_24dp"
+            android:title="Contact Us"/>
+
+        <item
+            android:id="@+id/about_us"
+            android:icon="@drawable/ic_info_outline_white_24dp"
+            android:title="About Us"/>
+    </group>
 </menu>

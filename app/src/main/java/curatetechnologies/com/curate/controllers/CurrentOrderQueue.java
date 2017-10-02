@@ -29,10 +29,12 @@ public class CurrentOrderQueue extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_order_queue, container, false);
         RecyclerView orderQueue = (RecyclerView) v.findViewById(R.id.orderQueueRecyclerView);
         orderQueue.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        getActivity().setTitle("Current Orders");
 
         final DatabaseReference ref = FirebaseAPI.SHARED.getCurrentOrdersRef();
 
@@ -54,14 +56,14 @@ public class CurrentOrderQueue extends Fragment {
                 viewHolder.setOnClickListener(new OrderQueueViewHolder.ClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        OrderDetails orderDetails = new OrderDetails();
+                        CurrentOrderDetails currentOrderDetails = new CurrentOrderDetails();
 
-                        orderDetails.setOrderRef(orderQueueAdapter.getRef(position));
-                        orderDetails.setOrder((Order) orderQueueAdapter.getItem(position));
+                        currentOrderDetails.setOrderRef(orderQueueAdapter.getRef(position));
+                        currentOrderDetails.setOrder((Order) orderQueueAdapter.getItem(position));
 
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
-                        transaction.replace(R.id.content_frame, orderDetails);
+                        transaction.replace(R.id.content_frame, currentOrderDetails);
                         transaction.commit();
                     }
                 });
