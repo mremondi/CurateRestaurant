@@ -3,22 +3,27 @@ package curatetechnologies.com.curate.controllers;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
+
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.models.Order;
 import curatetechnologies.com.curate.network.FirebaseAPI;
 
+/**
+ * Created by mremondi on 10/1/17.
+ */
 
-public class NewOrderQueue extends Fragment {
+public class CurrentOrderQueue extends Fragment {
 
     FirebaseRecyclerAdapter orderQueueAdapter;
 

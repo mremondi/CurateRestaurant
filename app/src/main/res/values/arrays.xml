@@ -6,4 +6,13 @@
         <item>Past Orders</item>
         <item>Customer Support</item>
     </string-array>
+
+    <string-array name="wait_times">
+        <item>10 minutes</item>
+        <item>20 minutes</item>
+        <item>30 minutes</item>
+        <item>45 minutes</item>
+        <item>1 hour</item>
+        <item>Hour +</item>
+    </string-array>
 </resources>
