@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 import curatetechnologies.com.curate.controllers.CompletedOrders;
 import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
-import curatetechnologies.com.curate.controllers.ManageMenu;
+import curatetechnologies.com.curate.controllers.SelectMenu;
 import curatetechnologies.com.curate.controllers.NewOrderQueue;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new CompletedOrders();
         }
         else if (id == R.id.manage_menu){
-            fragment = new ManageMenu();
+            fragment = new SelectMenu();
         }
         if (fragment != null) {
             FragmentManager fm = getFragmentManager();
