@@ -34,7 +34,7 @@ public class CurrentOrderQueue extends Fragment {
         RecyclerView orderQueue = (RecyclerView) v.findViewById(R.id.orderQueueRecyclerView);
         orderQueue.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        final DatabaseReference ref = FirebaseAPI.SHARED.getOrderQueueRef();
+        final DatabaseReference ref = FirebaseAPI.SHARED.getNewOrdersRef();
 
         orderQueueAdapter = new FirebaseRecyclerAdapter<Order, OrderQueueViewHolder>(
                 Order.class,

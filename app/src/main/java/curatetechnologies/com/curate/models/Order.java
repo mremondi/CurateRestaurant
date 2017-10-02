@@ -1,28 +1,33 @@
 package curatetechnologies.com.curate.models;
 
+import java.util.ArrayList;
+
 public class Order {
 
     // Necessary fields for our server and Stripe
-    private String orderID;
-    private String userID;
-    private String restaurantID;
+    private Long orderID;
+    private Long userID;
+    private Long restaurantID;
     // TODO: include any stripe tokens here
 
     private Integer price;
     private String timeToCompletion;
     private String username;
 
+    private ArrayList<MenuItem> order_items;
+
     public Order(){
         // needed for firebase
     }
 
-    public Order(String orderID, String userID, String restaurantID, Integer price, String timeToCompletion, String username) {
+    public Order(Long orderID, Long userID, Long restaurantID, Integer price, String timeToCompletion, String username, ArrayList<MenuItem> order_items) {
         this.orderID = orderID;
         this.userID = userID;
         this.restaurantID = restaurantID;
         this.price = price;
         this.timeToCompletion = timeToCompletion;
         this.username = username;
+        this.order_items = order_items;
     }
 
 
@@ -32,15 +37,35 @@ public class Order {
         return String.valueOf(this.price);
     }
 
-    public void setOrderID(String orderID) {
+    public Long getOrderID(){
+        return this.orderID;
+    }
+
+    public Long getUserID(){
+        return this.userID;
+    }
+
+    public Long getRestaurantID(){
+        return this.restaurantID;
+    }
+
+    public String getTimeToCompletion(){
+        return this.timeToCompletion;
+    }
+
+    public ArrayList<MenuItem> getOrder_items(){
+        return this.order_items;
+    }
+
+    public void setOrderID(Long orderID) {
         this.orderID = orderID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
-    public void setRestaurantID(String restaurantID) {
+    public void setRestaurantID(Long restaurantID) {
         this.restaurantID = restaurantID;
     }
 
@@ -50,6 +75,10 @@ public class Order {
 
     public void setTimeToCompletion(String timeToCompletion) {
         this.timeToCompletion = timeToCompletion;
+    }
+
+    public void setOrder_items(ArrayList<MenuItem> order_items){
+        this.order_items = order_items;
     }
 
     public void setUsername(String username) {

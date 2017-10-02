@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
 import curatetechnologies.com.curate.controllers.NewOrderQueue;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -84,6 +85,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.order_queue){
             Fragment orderQueue = new NewOrderQueue();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(R.id.content_frame, orderQueue);
+            transaction.commit();
+        }
+        else if (id == R.id.current_orders){
+            Fragment orderQueue = new CurrentOrderQueue();
             FragmentManager fm = getFragmentManager();
             FragmentTransaction transaction = fm.beginTransaction();
             transaction.replace(R.id.content_frame, orderQueue);

@@ -53,7 +53,7 @@ public class AcceptOrderDialog extends DialogFragment {
 
     private void setUpButtonListeners(View v){
         Button acceptWaitTimeButton = (Button) v.findViewById(R.id.btn_accept_wait_time);
-        Button cancelWaitTimeButton = (Button) v.findViewById(R.id.btn_cancel_wait_time);
+        final Button cancelWaitTimeButton = (Button) v.findViewById(R.id.btn_cancel_wait_time);
         acceptWaitTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

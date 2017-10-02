@@ -3,7 +3,6 @@ package curatetechnologies.com.curate.controllers;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -123,17 +122,20 @@ public class OrderDetails extends Fragment implements AcceptOrderDialog.AcceptOr
         this.orderRef = ref;
     }
 
-    public void setOrder(Order order) { this.order = order; }
+    public void setOrder(Order order) { this.order = order;}
 
     @Override
-    public void onCancelClick() {
-        Toast.makeText(this.getActivity(), "No wait time set", Toast.LENGTH_SHORT).show();
+    public void onPositiveClick(String waitTime) {
+        order.setTimeToCompletion(waitTime);
+        FirebaseAPI.SHARED.moveNewOrderToCurrentOrder(orderRef, order);
+        // Todo: go back to new orders
+        Toast.makeText(this.getActivity(), "Wait time set: " + waitTime, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
 
     @Override
-    public void onPositiveClick(String waitTime) {
-        Toast.makeText(this.getActivity(), "Wait time set: " + waitTime, Toast.LENGTH_SHORT).show();
+    public void onCancelClick() {
+        Toast.makeText(this.getActivity(), "No wait time set", Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
 }
