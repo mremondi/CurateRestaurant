@@ -30,11 +30,11 @@ public class CurrentOrderQueue extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_new_order_queue, container, false);
+        View v = inflater.inflate(R.layout.fragment_current_order_queue, container, false);
         RecyclerView orderQueue = (RecyclerView) v.findViewById(R.id.orderQueueRecyclerView);
         orderQueue.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        final DatabaseReference ref = FirebaseAPI.SHARED.getNewOrdersRef();
+        final DatabaseReference ref = FirebaseAPI.SHARED.getCurrentOrdersRef();
 
         orderQueueAdapter = new FirebaseRecyclerAdapter<Order, OrderQueueViewHolder>(
                 Order.class,
