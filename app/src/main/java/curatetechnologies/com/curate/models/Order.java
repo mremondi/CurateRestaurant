@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Order {
 
     // Necessary fields for our server and Stripe
-    private Long orderID;
-    private Long userID;
-    private Long restaurantID;
+    private String orderID;
+    private String userID;
+    private String restaurantID;
     // TODO: include any stripe tokens here
 
     private String price;
@@ -20,7 +20,7 @@ public class Order {
         // needed for firebase
     }
 
-    public Order(Long orderID, Long userID, Long restaurantID, String price, String timeToCompletion, String username, ArrayList<MenuItem> order_items) {
+    public Order(String orderID, String userID, String restaurantID, String price, String timeToCompletion, String username, ArrayList<MenuItem> order_items) {
         this.orderID = orderID;
         this.userID = userID;
         this.restaurantID = restaurantID;
@@ -37,15 +37,15 @@ public class Order {
         return this.price;
     }
 
-    public Long getOrderID(){
+    public String getOrderID(){
         return this.orderID;
     }
 
-    public Long getUserID(){
+    public String getUserID(){
         return this.userID;
     }
 
-    public Long getRestaurantID(){
+    public String getRestaurantID(){
         return this.restaurantID;
     }
 
@@ -57,15 +57,15 @@ public class Order {
         return this.order_items;
     }
 
-    public void setOrderID(Long orderID) {
+    public void setOrderID(String orderID) {
         this.orderID = orderID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public void setRestaurantID(Long restaurantID) {
+    public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
     }
 

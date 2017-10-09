@@ -1,6 +1,7 @@
 package curatetechnologies.com.curate.controllers;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,8 @@ import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.models.MenuItem;
 import curatetechnologies.com.curate.models.Order;
 import curatetechnologies.com.curate.network.FirebaseAPI;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by mremondi on 10/2/17.
@@ -96,10 +99,13 @@ public class CurrentOrderDetails extends Fragment {
         orderTotalPrice.setText("$" + this.order.getPrice());
 
         Button btnCompleteOrder = (Button) v.findViewById(R.id.btn_complete_order);
+        final String restaurantID;
+        SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
+        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
         btnCompleteOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(orderRef, order);
+                FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(restaurantID, orderRef, order);
             }
         });
     }

@@ -3,6 +3,7 @@ package curatetechnologies.com.curate.controllers;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.models.Order;
 import curatetechnologies.com.curate.network.FirebaseAPI;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by mremondi on 10/2/17.
@@ -36,7 +39,11 @@ public class CompletedOrders extends Fragment {
 
         getActivity().setTitle("Completed Orders");
 
-        final DatabaseReference ref = FirebaseAPI.SHARED.getCompletedOrdersRef();
+        String restaurantID;
+        SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
+        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
+
+        final DatabaseReference ref = FirebaseAPI.SHARED.getCompletedOrdersRef(restaurantID);
 
         orderQueueAdapter = new FirebaseRecyclerAdapter<Order, OrderQueueViewHolder>(
                 Order.class,

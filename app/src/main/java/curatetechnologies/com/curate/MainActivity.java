@@ -3,6 +3,7 @@ package curatetechnologies.com.curate;
 import android.app.FragmentManager;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,8 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import curatetechnologies.com.curate.controllers.CompletedOrders;
 import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
+import curatetechnologies.com.curate.controllers.LoginActivity;
 import curatetechnologies.com.curate.controllers.SelectMenu;
 import curatetechnologies.com.curate.controllers.NewOrderQueue;
 
@@ -78,6 +82,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.manage_menu){
             fragment = new SelectMenu();
+        }
+        else if (id == R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+            finish();
+            return true;
         }
         if (fragment != null) {
             FragmentManager fm = getFragmentManager();

@@ -1,5 +1,6 @@
 package curatetechnologies.com.curate.controllers;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -21,6 +22,8 @@ import curatetechnologies.com.curate.controllers.dialogs.AcceptOrderDialog;
 import curatetechnologies.com.curate.models.MenuItem;
 import curatetechnologies.com.curate.models.Order;
 import curatetechnologies.com.curate.network.FirebaseAPI;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class NewOrderDetails extends Fragment implements AcceptOrderDialog.AcceptOrderDialogListener{
 
@@ -127,7 +130,10 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
     @Override
     public void onPositiveClick(String waitTime) {
         order.setTimeToCompletion(waitTime);
-        FirebaseAPI.SHARED.moveNewOrderToCurrentOrder(orderRef, order);
+        String restaurantID;
+        SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
+        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
+        FirebaseAPI.SHARED.moveNewOrderToCurrentOrder(restaurantID, orderRef, order);
         // Todo: go back to new orders
         Toast.makeText(this.getActivity(), "Wait time set: " + waitTime, Toast.LENGTH_SHORT).show();
         dialog.dismiss();

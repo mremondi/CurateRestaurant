@@ -6,7 +6,7 @@ package curatetechnologies.com.curate.models;
 
 public class MenuItem {
 
-    private Long itemID;
+    private String itemID;
     private String itemName;
 
 
@@ -14,7 +14,7 @@ public class MenuItem {
         // needed for firebase
     }
 
-    public MenuItem(Long itemID, String itemName) {
+    public MenuItem(String itemID, String itemName) {
         this.itemID = itemID;
         this.itemName = itemName;
     }
@@ -24,11 +24,11 @@ public class MenuItem {
         return this.itemName;
     }
 
-    public Long getItemID() {
+    public String getItemID() {
         return this.itemID;
     }
 
-    public void setItemID(Long itemID){
+    public void setItemID(String itemID){
         this.itemID = itemID;
     }
 
