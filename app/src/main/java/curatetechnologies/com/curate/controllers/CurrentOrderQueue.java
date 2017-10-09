@@ -22,10 +22,6 @@ import curatetechnologies.com.curate.network.FirebaseAPI;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by mremondi on 10/1/17.
- */
-
 public class CurrentOrderQueue extends Fragment {
 
     FirebaseRecyclerAdapter orderQueueAdapter;
