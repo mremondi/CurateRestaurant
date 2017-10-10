@@ -12,6 +12,8 @@ public class Order {
 
     private String price;
     private String timeToCompletion;
+    private String startingTime;
+    private String completedTime;
     private String username;
 
     private ArrayList<MenuItem> order_items;
@@ -84,4 +86,21 @@ public class Order {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getStartingTime() {
+        return startingTime;
+    }
+
+    public void setStartingTime(String startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    public String getCompletedTime() {
+        return completedTime;
+    }
+
+    public void setCompletedTime(String completedTime) {
+        this.completedTime = completedTime;
+    }
 }
+

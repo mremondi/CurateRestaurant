@@ -105,7 +105,9 @@ public class CurrentOrderDetails extends Fragment {
         btnCompleteOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                order.setCompletedTime("" + System.currentTimeMillis());
                 FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(restaurantID, orderRef, order);
+                FirebaseAPI.SHARED.saveOrderHistory(order);
             }
         });
     }

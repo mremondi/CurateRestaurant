@@ -1,5 +1,6 @@
 package curatetechnologies.com.curate.network;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -12,6 +13,18 @@ import curatetechnologies.com.curate.models.Order;
 public enum FirebaseAPI {
 
     SHARED;
+
+    /** USER ROUTES **/
+    public void addUserToDatabase(FirebaseUser user){
+        FirebaseDatabase.getInstance().getReference().child("users").setValue(user);
+    }
+
+
+    public DatabaseReference getUserRestaurantRef(String userID){
+        return FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("restaurantID");
+    }
+
+    /** ORDER ROUTES **/
 
     public DatabaseReference getNewOrdersRef(String restaurantID){
         return FirebaseDatabase.getInstance().getReference().child("restaurants").child(restaurantID).child("new_orders");
@@ -34,7 +47,11 @@ public enum FirebaseAPI {
         newRef.child(orderRef.getKey()).setValue(order);
 
         //orderRef.removeValue();
+    }
 
+    public void saveOrderHistory(Order order){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("order_history");
+        ref.setValue(order);
     }
 
     public void moveCurrentOrderToCompletedOrders(String restaurantID, DatabaseReference orderRef, Order order){
@@ -43,9 +60,4 @@ public enum FirebaseAPI {
 
         //orderRef.removeValue();
     }
-
-    public DatabaseReference getUserRestaurantRef(String userID){
-        return FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("restaurantID");
-    }
-
 }
