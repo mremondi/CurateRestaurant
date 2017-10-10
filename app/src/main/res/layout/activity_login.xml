@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/login_curate_logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/login_email"
         android:src="@mipmap/ic_launcher"/>
@@ -16,6 +16,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
+        android:hint="Email Address"
         android:layout_centerInParent="true" />
 
     <EditText
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_centerHorizontal="true"
+        android:hint="Password"
         android:layout_below="@+id/login_email"/>
 
     <Button
@@ -32,6 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/login_password"
+        android:background="@color/redPastel"
+        android:textColor="@color/white"
+        android:layout_marginBottom="8dp"
         android:text="Login"/>
 
     <Button
@@ -40,6 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/login_button"
+        android:background="@color/primaryRed"
+        android:textColor="@color/white"
         android:text="Register" />
 
 
