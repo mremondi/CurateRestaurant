@@ -130,6 +130,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new SelectMenu();
         }
         else if (id == R.id.logout){
+
+
+            SharedPreferences.Editor editor = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE).edit();
+            editor.clear();
+            editor.apply();
+
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);

@@ -153,7 +153,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 SharedPreferences.Editor editor = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE).edit();
-                Log.d("SNAP", (String) dataSnapshot.getValue());
                 editor.putString("restaurantID", (String) dataSnapshot.getValue());
                 editor.apply();
                 updateUI(user);

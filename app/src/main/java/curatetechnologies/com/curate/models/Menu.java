@@ -5,4 +5,6 @@ package curatetechnologies.com.curate.models;
  */
 
 public class Menu {
+
+
 }

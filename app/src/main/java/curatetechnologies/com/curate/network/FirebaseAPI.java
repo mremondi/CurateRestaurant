@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import curatetechnologies.com.curate.models.Manager;
 import curatetechnologies.com.curate.models.Order;
 
 /**
@@ -16,7 +17,8 @@ public enum FirebaseAPI {
 
     /** USER ROUTES **/
     public void addUserToDatabase(FirebaseUser user){
-        FirebaseDatabase.getInstance().getReference().child("users").setValue(user);
+        Manager manager = new Manager(user.getEmail(), "");
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).setValue(manager);
     }
 
 
