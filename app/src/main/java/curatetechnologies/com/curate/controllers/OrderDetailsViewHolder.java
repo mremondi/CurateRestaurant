@@ -14,10 +14,12 @@ import curatetechnologies.com.curate.R;
 public class OrderDetailsViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView itemName;
+    private final TextView itemPrice;
 
     public OrderDetailsViewHolder(final View itemView) {
         super(itemView);
         itemName = (TextView) itemView.findViewById(R.id.order_details_row_item_name);
+        itemPrice = (TextView) itemView.findViewById(R.id.order_details_item_price);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +41,10 @@ public class OrderDetailsViewHolder extends RecyclerView.ViewHolder {
 
     public void setItemName(String itemName) {
         this.itemName.setText(itemName);
+    }
+
+    public void setItemPrice(String itemPrice){
+        this.itemPrice.setText(itemPrice);
     }
 
 }

@@ -8,15 +8,17 @@ public class MenuItem {
 
     private String itemID;
     private String itemName;
+    private String itemPrice;
 
 
     public MenuItem(){
         // needed for firebase
     }
 
-    public MenuItem(String itemID, String itemName) {
+    public MenuItem(String itemID, String itemName, String itemPrice) {
         this.itemID = itemID;
         this.itemName = itemName;
+        this.itemPrice = itemPrice;
     }
 
 
@@ -35,4 +37,13 @@ public class MenuItem {
     public void setItemName(String itemName){
         this.itemName = itemName;
     }
+
+    public void setItemPrice(String itemPrice){
+        this.itemPrice = itemPrice;
+    }
+
+    public String getItemPrice(){
+        return this.itemPrice;
+    }
 }
+
