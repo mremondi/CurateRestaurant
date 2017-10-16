@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import curatetechnologies.com.curate.MainActivity;
 import curatetechnologies.com.curate.R;
@@ -81,13 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d("USER LOG", "signInWithEmail:success");
                                         final FirebaseUser user = mAuth.getCurrentUser();
-                                        user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<GetTokenResult> task) {
-                                                GetTokenResult result = task.getResult();
-                                                FirebaseAPI.SHARED.updateToken(user, result.getToken());
-                                            }
-                                        });
                                         saveRestaurantID(user);
                                         //updateUI(user);
                                     } else {
@@ -113,14 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 final FirebaseUser user = mAuth.getCurrentUser();
-                                user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<GetTokenResult> task) {
-                                        GetTokenResult result = task.getResult();
-                                        FirebaseAPI.SHARED.addUserToDatabase(user, result.getToken());
-                                    }
-                                });
-
+                                FirebaseAPI.SHARED.addUserToDatabase(user);
                                 updateUI(user);
 
                             } else {
@@ -163,13 +150,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void saveRestaurantID(final FirebaseUser user){
         DatabaseReference ref = FirebaseAPI.SHARED.getUserRestaurantRef(user.getUid());
-        Log.d("REF", ref.toString());
+
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 SharedPreferences.Editor editor = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE).edit();
+                String restaurantID = (String) dataSnapshot.getValue();
                 editor.putString("restaurantID", (String) dataSnapshot.getValue());
                 editor.apply();
+                updateDeviceToken(restaurantID);
                 updateUI(user);
             }
 
@@ -178,6 +167,10 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("ERROR", databaseError.getMessage());
             }
         });
+    }
+
+    private void updateDeviceToken(final String restaurantID){
+        FirebaseAPI.SHARED.setRestaurantDeviceToken(restaurantID, FirebaseInstanceId.getInstance().getToken());
     }
 
 }

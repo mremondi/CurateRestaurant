@@ -1,5 +1,6 @@
 package curatetechnologies.com.curate.network;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,14 +21,12 @@ public class CurateFirebaseInstanceIdService extends FirebaseInstanceIdService {
     public void onTokenRefresh() {
         //Get hold of the registration token
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        //Log the token
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
-
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
-            Log.d("HERE", "HERE");
-            FirebaseAPI.SHARED.updateToken(firebaseUser, refreshedToken);
+            SharedPreferences prefs = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
+            String restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
+            FirebaseAPI.SHARED.setRestaurantDeviceToken(restaurantID, refreshedToken);
 
         }
     }
