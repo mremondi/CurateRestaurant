@@ -16,10 +16,19 @@ public enum FirebaseAPI {
     SHARED;
 
     /** USER ROUTES **/
-    public void addUserToDatabase(FirebaseUser user){
-        Manager manager = new Manager(user.getEmail(), "");
+    public void addUserToDatabase(FirebaseUser user, String token){
+        Manager manager = new Manager(user.getEmail(), "", token);
         FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).setValue(manager);
     }
+
+    public void updateToken(FirebaseUser user, String refreshedToken) {
+        FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(user.getUid())
+                .child("deviceToken")
+                .setValue(refreshedToken);
+    }
+
 
 
     public DatabaseReference getUserRestaurantRef(String userID){

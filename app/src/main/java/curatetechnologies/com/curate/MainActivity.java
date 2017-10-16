@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import curatetechnologies.com.curate.controllers.CompletedOrders;
 import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
@@ -35,6 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    String restaurantID;
 
     private final CurateAPI craveAPI = CurateConnection.setUpRetrofit();
 
@@ -67,15 +69,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         View navHeader = navigationView.getHeaderView(0);
 
-        String restaurantID;
-        SharedPreferences prefs = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
-
         final AppCompatActivity activity = this;
 
         final ImageView ivRestaurantLogo = (ImageView) navHeader.findViewById(R.id.restaurant_logo);
         final TextView restaurantName = (TextView) navHeader.findViewById(R.id.restaurant_name);
         final TextView username = (TextView) navHeader.findViewById(R.id.username);
+
+        SharedPreferences prefs = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
+        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
 
         Call<Restaurant> restaurantQuery = craveAPI.getRestaurantById(restaurantID);
         restaurantQuery.enqueue(new Callback<Restaurant>() {

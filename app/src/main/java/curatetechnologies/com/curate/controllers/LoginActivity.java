@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,7 +80,14 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d("USER LOG", "signInWithEmail:success");
-                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        final FirebaseUser user = mAuth.getCurrentUser();
+                                        user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                                GetTokenResult result = task.getResult();
+                                                FirebaseAPI.SHARED.updateToken(user, result.getToken());
+                                            }
+                                        });
                                         saveRestaurantID(user);
                                         //updateUI(user);
                                     } else {
@@ -104,8 +112,15 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                FirebaseAPI.SHARED.addUserToDatabase(user);
+                                final FirebaseUser user = mAuth.getCurrentUser();
+                                user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                        GetTokenResult result = task.getResult();
+                                        FirebaseAPI.SHARED.addUserToDatabase(user, result.getToken());
+                                    }
+                                });
+
                                 updateUI(user);
 
                             } else {
