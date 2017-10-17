@@ -8,6 +8,8 @@ public class Order {
     private String orderID;
     private String userID;
     private String restaurantID;
+    private String restaurantName;
+    private String deviceID;
     // TODO: include any stripe tokens here
 
     private String price;
@@ -22,7 +24,7 @@ public class Order {
         // needed for firebase
     }
 
-    public Order(String orderID, String userID, String restaurantID, String price, String timeToCompletion, String username, ArrayList<MenuItem> order_items) {
+    public Order(String orderID, String userID, String restaurantID, String restaurantName, String deviceID, String price, String timeToCompletion, String username, ArrayList<MenuItem> order_items) {
         this.orderID = orderID;
         this.userID = userID;
         this.restaurantID = restaurantID;
@@ -101,6 +103,22 @@ public class Order {
 
     public void setCompletedTime(String completedTime) {
         this.completedTime = completedTime;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public String getDeviceID() {
+        return deviceID;
+    }
+
+    public void setDeviceID(String deviceID) {
+        this.deviceID = deviceID;
     }
 }
 

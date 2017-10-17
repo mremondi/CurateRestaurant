@@ -27,12 +27,10 @@ public class CurateFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
         //create notification
-        createNotification(remoteMessage.getNotification().getBody());
+        createNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
     }
 
-    private void createNotification( String messageBody) {
-
-        // TODO: Figure out how to pass the order through?
+    private void createNotification(String title, String messageBody) {
 
         Intent intent = new Intent( this , MainActivity.class );
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -40,16 +38,16 @@ public class CurateFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri notificationSoundURI = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder( this)
+        NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder(this, "DEFAULT_CHANNEL")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Android Tutorial Point FCM Tutorial")
+                .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel( true )
                 .setSound(notificationSoundURI)
+                .setPriority(4)
                 .setContentIntent(resultIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, mNotificationBuilder.build());
     }
