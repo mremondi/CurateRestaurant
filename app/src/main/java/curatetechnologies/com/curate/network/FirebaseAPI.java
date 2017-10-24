@@ -57,7 +57,7 @@ public enum FirebaseAPI {
         DatabaseReference newRef = getCurrentOrdersRef(restaurantID);
         newRef.child(orderRef.getKey()).setValue(order);
 
-        //orderRef.removeValue();
+        orderRef.removeValue();
     }
 
     public void saveOrderHistory(Order order){
@@ -69,6 +69,6 @@ public enum FirebaseAPI {
         DatabaseReference newRef = getCompletedOrdersRef(restaurantID);
         newRef.child(orderRef.getKey()).setValue(order);
 
-        //orderRef.removeValue();
+        orderRef.removeValue();
     }
 }

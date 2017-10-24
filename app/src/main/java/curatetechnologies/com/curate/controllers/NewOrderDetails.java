@@ -1,5 +1,8 @@
 package curatetechnologies.com.curate.controllers;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -112,7 +115,8 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // present dialog asking if they are sure they want to reject the order
+                // TODO: remove the order from the queue and send a notification to the user
             }
         });
     }
@@ -135,9 +139,16 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
         restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
         FirebaseAPI.SHARED.moveNewOrderToCurrentOrder(restaurantID, orderRef, order);
-        // Todo: go back to new orders
-        Toast.makeText(this.getActivity(), "Wait time set: " + waitTime, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getActivity(), "Wait time set: " + waitTime, Toast.LENGTH_LONG).show();
         dialog.dismiss();
+
+        NewOrderQueue newOrderQueue = new NewOrderQueue();
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.content_frame, newOrderQueue);
+        transaction.commit();
+
     }
 
     @Override

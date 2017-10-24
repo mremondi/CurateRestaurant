@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
     private void signInUser(){
         String email = this.email.getText().toString();
         String password  = this.password.getText().toString();
+        Log.d("PASSWORD", password);
         if (isEmailLegal(email) && isPasswordLegal(password)) {
                     mAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

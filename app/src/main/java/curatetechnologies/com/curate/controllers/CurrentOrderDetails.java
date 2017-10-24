@@ -1,6 +1,8 @@
 package curatetechnologies.com.curate.controllers;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -108,6 +110,13 @@ public class CurrentOrderDetails extends Fragment {
                 order.setCompletedTime("" + System.currentTimeMillis());
                 FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(restaurantID, orderRef, order);
                 FirebaseAPI.SHARED.saveOrderHistory(order);
+
+                CurrentOrderQueue currentOrderQueue = new CurrentOrderQueue();
+
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.content_frame, currentOrderQueue);
+                transaction.commit();
             }
         });
     }
