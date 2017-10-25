@@ -17,6 +17,8 @@ public class Order {
     private String startingTime;
     private String completedTime;
     private String username;
+    private String fullName;
+    private String profilePictureURL;
 
     private ArrayList<MenuItem> order_items;
 
@@ -24,13 +26,15 @@ public class Order {
         // needed for firebase
     }
 
-    public Order(String orderID, String userID, String restaurantID, String restaurantName, String deviceID, String price, String timeToCompletion, String username, ArrayList<MenuItem> order_items) {
+    public Order(String orderID, String userID, String restaurantID, String restaurantName, String deviceID, String price, String timeToCompletion, String username, String fullName, String profilePictureURL, ArrayList<MenuItem> order_items) {
         this.orderID = orderID;
         this.userID = userID;
         this.restaurantID = restaurantID;
         this.price = price;
         this.timeToCompletion = timeToCompletion;
         this.username = username;
+        this.fullName = fullName;
+        this.profilePictureURL = profilePictureURL;
         this.order_items = order_items;
     }
 
@@ -119,6 +123,22 @@ public class Order {
 
     public void setDeviceID(String deviceID) {
         this.deviceID = deviceID;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getProfilePictureURL() {
+        return profilePictureURL;
+    }
+
+    public void setProfilePictureURL(String profilePictureURL) {
+        this.profilePictureURL = profilePictureURL;
     }
 }
 

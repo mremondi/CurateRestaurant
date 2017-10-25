@@ -3,7 +3,6 @@
     <string name="drawer_open">OPEN</string>
     <string name="drawer_close">CLOSED</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_app_id">472813193117902</string>
 
 </resources>

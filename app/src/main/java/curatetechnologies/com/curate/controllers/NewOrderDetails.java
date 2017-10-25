@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
@@ -91,6 +93,14 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
 
     private void configureView(View v) {
         getActivity().setTitle("Order Details");
+
+        ImageView profilePicture = (ImageView) v.findViewById(R.id.order_details_profile_picture);
+        Glide.with(v)
+                .load(order.getProfilePictureURL())
+                .into(profilePicture);
+
+        TextView fullName = (TextView) v.findViewById(R.id.order_details_full_name);
+        fullName.setText(order.getFullName());
 
         TextView orderUserName = (TextView) v.findViewById(R.id.order_details_username);
         TextView orderTotalPrice = (TextView) v.findViewById(R.id.order_details_total_price);

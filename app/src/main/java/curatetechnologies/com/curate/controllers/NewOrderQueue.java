@@ -51,6 +51,7 @@ public class NewOrderQueue extends Fragment {
             public void populateViewHolder(OrderQueueViewHolder holder, Order order, int position) {
                 holder.setUserName(order.getUsername());
                 holder.setOrderPrice(order.getPrice());
+                holder.setProfilePicture(order.getProfilePictureURL());
             }
 
             @Override

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.facebook.FacebookSdk;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;

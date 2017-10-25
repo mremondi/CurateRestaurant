@@ -2,7 +2,10 @@ package curatetechnologies.com.curate;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 /**
  * Created by mremondi on 9/15/17.
@@ -12,12 +15,14 @@ public class OrderQueueViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView userName;
     private final TextView orderPrice;
+    private final ImageView profilePicture;
 
 
     public OrderQueueViewHolder(final View itemView) {
         super(itemView);
         userName = (TextView) itemView.findViewById(R.id.order_row_user_name);
         orderPrice = (TextView) itemView.findViewById(R.id.order_row_price);
+        profilePicture = (ImageView) itemView.findViewById(R.id.order_row_profile_picture);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +49,12 @@ public class OrderQueueViewHolder extends RecyclerView.ViewHolder {
 
     public void setOrderPrice(String price){
         this.orderPrice.setText("$" + price);
+    }
+
+    public void setProfilePicture(String url){
+        Glide.with(itemView)
+                .load(url)
+                .into(profilePicture);
     }
 
 }
