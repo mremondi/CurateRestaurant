@@ -45,6 +45,10 @@ public enum FirebaseAPI {
         return FirebaseDatabase.getInstance().getReference().child("restaurants").child(restaurantID).child("current_orders");
     }
 
+    public DatabaseReference getRejectedOrdersRef(){
+        return FirebaseDatabase.getInstance().getReference().child("rejected_orders");
+    }
+
     public DatabaseReference getCompletedOrdersRef(String restaurantID){
         return FirebaseDatabase.getInstance().getReference().child("restaurants").child(restaurantID).child("completed_orders");
     }
@@ -53,25 +57,28 @@ public enum FirebaseAPI {
         return orderRef.child("order_items");
     }
 
-    public void rejectNewOrder(DatabaseReference orderRef){
+    public void rejectNewOrder(DatabaseReference orderRef, Order order){
+        DatabaseReference rejectedRef = getRejectedOrdersRef();
+        rejectedRef.child(orderRef.getKey()).setValue(order);
+
         orderRef.removeValue();
     }
 
     public void moveNewOrderToCurrentOrder(String restaurantID, DatabaseReference orderRef, Order order){
-        DatabaseReference newRef = getCurrentOrdersRef(restaurantID);
-        newRef.child(orderRef.getKey()).setValue(order);
+        DatabaseReference currentOrdersRef = getCurrentOrdersRef(restaurantID);
+        currentOrdersRef.child(orderRef.getKey()).setValue(order);
 
         orderRef.removeValue();
     }
 
-    public void saveOrderHistory(Order order){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("order_history");
+    public void saveOrderHistory(DatabaseReference orderRef, Order order){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("order_history").child(orderRef.getKey());
         ref.setValue(order);
     }
 
     public void moveCurrentOrderToCompletedOrders(String restaurantID, DatabaseReference orderRef, Order order){
-        DatabaseReference newRef = getCompletedOrdersRef(restaurantID);
-        newRef.child(orderRef.getKey()).setValue(order);
+        DatabaseReference completedOrdersRef = getCompletedOrdersRef(restaurantID);
+        completedOrdersRef.child(orderRef.getKey()).setValue(order);
 
         orderRef.removeValue();
     }

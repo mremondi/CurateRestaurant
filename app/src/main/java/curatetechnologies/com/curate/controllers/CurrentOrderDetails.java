@@ -119,7 +119,7 @@ public class CurrentOrderDetails extends Fragment {
             public void onClick(View view) {
                 order.setCompletedTime("" + System.currentTimeMillis());
                 FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(restaurantID, orderRef, order);
-                FirebaseAPI.SHARED.saveOrderHistory(order);
+                FirebaseAPI.SHARED.saveOrderHistory(orderRef, order);
 
                 CurrentOrderQueue currentOrderQueue = new CurrentOrderQueue();
 

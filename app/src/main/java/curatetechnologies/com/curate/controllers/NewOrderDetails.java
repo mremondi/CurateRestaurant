@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,10 +126,8 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // present dialog asking if they are sure they want to reject the order
-
-                // TODO: remove the order from the queue and send a notification to the user
-                FirebaseAPI.SHARED.rejectNewOrder(orderRef);
+                // TODO: present dialog asking if they are sure they want to reject the order
+                FirebaseAPI.SHARED.rejectNewOrder(orderRef, order);
                 NewOrderQueue newOrderQueue = new NewOrderQueue();
 
                 FragmentManager fm = getFragmentManager();
