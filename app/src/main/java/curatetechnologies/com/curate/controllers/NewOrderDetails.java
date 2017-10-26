@@ -126,7 +126,15 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
             @Override
             public void onClick(View view) {
                 // present dialog asking if they are sure they want to reject the order
+
                 // TODO: remove the order from the queue and send a notification to the user
+                FirebaseAPI.SHARED.rejectNewOrder(orderRef);
+                NewOrderQueue newOrderQueue = new NewOrderQueue();
+
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.content_frame, newOrderQueue);
+                transaction.commit();
             }
         });
     }

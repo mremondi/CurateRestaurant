@@ -53,6 +53,10 @@ public enum FirebaseAPI {
         return orderRef.child("order_items");
     }
 
+    public void rejectNewOrder(DatabaseReference orderRef){
+        orderRef.removeValue();
+    }
+
     public void moveNewOrderToCurrentOrder(String restaurantID, DatabaseReference orderRef, Order order){
         DatabaseReference newRef = getCurrentOrdersRef(restaurantID);
         newRef.child(orderRef.getKey()).setValue(order);
