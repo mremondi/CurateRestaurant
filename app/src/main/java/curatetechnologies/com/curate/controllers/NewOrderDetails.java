@@ -1,7 +1,9 @@
 package curatetechnologies.com.curate.controllers;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
+import curatetechnologies.com.curate.MainActivity;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.dialogs.AcceptOrderDialog;
@@ -126,14 +129,32 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: present dialog asking if they are sure they want to reject the order
-                FirebaseAPI.SHARED.rejectNewOrder(orderRef, order);
-                NewOrderQueue newOrderQueue = new NewOrderQueue();
 
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction transaction = fm.beginTransaction();
-                transaction.replace(R.id.content_frame, newOrderQueue);
-                transaction.commit();
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                alertDialog.setTitle("Rejecting Order");
+                alertDialog.setMessage("Are you sure you want to reject this order?");
+
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAPI.SHARED.rejectNewOrder(orderRef, order);
+                                NewOrderQueue newOrderQueue = new NewOrderQueue();
+
+                                FragmentManager fm = getFragmentManager();
+                                FragmentTransaction transaction = fm.beginTransaction();
+                                transaction.replace(R.id.content_frame, newOrderQueue);
+                                transaction.commit();
+                            }
+                        });
+                alertDialog.show();
+
+
             }
         });
     }
