@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/support_curate_logo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/big_logo"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/support_curate_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/support_curate_logo"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="Curate Technologies, Inc."/>
+
+    <TextView
+        android:id="@+id/support_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/support_curate_name"
+        android:textSize="22sp"
+        android:textColor="@color/primaryRed"
+        android:text="support@curatemeals.com"
+        android:autoLink="email"/>
+
+    <TextView
+        android:id="@+id/support_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/support_email"
+        android:textSize="22sp"
+        android:text="1-781-439-1745" />
+
+</RelativeLayout>

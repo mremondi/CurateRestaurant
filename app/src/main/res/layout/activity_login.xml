@@ -9,7 +9,7 @@
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/login_email"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/big_logo"/>
 
     <EditText
         android:id="@+id/login_email"

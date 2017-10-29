@@ -10,23 +10,19 @@ import android.view.ViewGroup;
 import curatetechnologies.com.curate.R;
 
 /**
- * Created by mremondi on 10/2/17.
+ * Created by mremondi on 10/29/17.
  */
 
-public class SelectMenu extends Fragment {
+public class AboutUs extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
             savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_select_menu, container, false);
+        View v = inflater.inflate(R.layout.fragment_about_us, container, false);
 
-        getActivity().setTitle("Manage Menus");
-
-        // Todo: load all of the restaurant's menus
-        // Todo: allow the restaurant user to select which menu is active?
+        getActivity().setTitle("About Us");
 
         return v;
     }
-
 }

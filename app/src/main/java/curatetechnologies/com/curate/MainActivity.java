@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,11 +25,14 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import curatetechnologies.com.curate.controllers.AboutUs;
 import curatetechnologies.com.curate.controllers.CompletedOrders;
 import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
 import curatetechnologies.com.curate.controllers.LoginActivity;
 import curatetechnologies.com.curate.controllers.SelectMenu;
 import curatetechnologies.com.curate.controllers.NewOrderQueue;
+import curatetechnologies.com.curate.controllers.Settings;
+import curatetechnologies.com.curate.controllers.Support;
 import curatetechnologies.com.curate.models.Restaurant;
 import curatetechnologies.com.curate.network.CurateAPI;
 import curatetechnologies.com.curate.network.CurateConnection;
@@ -131,8 +135,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.manage_menu){
             fragment = new SelectMenu();
         }
+        else if (id == R.id.settings){
+            fragment = new Settings();
+        }
+        else if (id == R.id.contact_us){
+            fragment = new Support();
+        }
+        else if (id == R.id.about_us) {
+            fragment = new AboutUs();
+        }
         else if (id == R.id.logout){
-
 
             SharedPreferences.Editor editor = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE).edit();
             editor.clear();
