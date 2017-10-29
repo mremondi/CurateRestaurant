@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,7 +23,6 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
-import curatetechnologies.com.curate.MainActivity;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.dialogs.AcceptOrderDialog;
@@ -57,7 +55,7 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
     }
 
     private void configureFirebase(View v) {
-        RecyclerView orderQueue = (RecyclerView) v.findViewById(R.id.order_details_recyclerview);
+        RecyclerView orderQueue = v.findViewById(R.id.order_details_recyclerview);
         orderQueue.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         DatabaseReference ref = FirebaseAPI.SHARED.getOrderItemsRef(orderRef);
@@ -103,11 +101,14 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
                 .load(order.getProfilePictureURL())
                 .into(profilePicture);
 
-        TextView fullName = (TextView) v.findViewById(R.id.order_details_full_name);
+        TextView fullName = v.findViewById(R.id.order_details_full_name);
         fullName.setText(order.getFullName());
 
-        TextView orderUserName = (TextView) v.findViewById(R.id.order_details_username);
-        TextView orderTotalPrice = (TextView) v.findViewById(R.id.order_details_total_price);
+        TextView instructions = v.findViewById(R.id.order_details_instructions);
+        instructions.setText(order.getInstructions());
+
+        TextView orderUserName = v.findViewById(R.id.order_details_username);
+        TextView orderTotalPrice = v.findViewById(R.id.order_details_total_price);
         orderUserName.setText(this.order.getUsername());
         orderTotalPrice.setText("$" + this.order.getPrice());
 

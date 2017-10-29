@@ -30,7 +30,7 @@ public class NewOrderQueue extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_order_queue, container, false);
-        RecyclerView orderQueue = (RecyclerView) v.findViewById(R.id.orderQueueRecyclerView);
+        RecyclerView orderQueue = v.findViewById(R.id.orderQueueRecyclerView);
         orderQueue.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         getActivity().setTitle("New Orders");

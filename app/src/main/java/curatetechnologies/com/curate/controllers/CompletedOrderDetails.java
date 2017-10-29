@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -89,6 +88,9 @@ public class CompletedOrderDetails extends Fragment {
 
         TextView fullName = (TextView) v.findViewById(R.id.order_details_full_name);
         fullName.setText(order.getFullName());
+
+        TextView instructions = v.findViewById(R.id.order_details_instructions);
+        instructions.setText(order.getInstructions());
 
         TextView orderUserName = (TextView) v.findViewById(R.id.order_details_username);
         TextView orderTotalPrice = (TextView) v.findViewById(R.id.order_details_total_price);

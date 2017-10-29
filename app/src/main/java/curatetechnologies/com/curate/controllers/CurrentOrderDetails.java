@@ -105,6 +105,9 @@ public class CurrentOrderDetails extends Fragment {
         TextView fullName = (TextView) v.findViewById(R.id.order_details_full_name);
         fullName.setText(order.getFullName());
 
+        TextView instructions = v.findViewById(R.id.order_details_instructions);
+        instructions.setText(order.getInstructions());
+
         TextView orderUserName = (TextView) v.findViewById(R.id.order_details_username);
         TextView orderTotalPrice = (TextView) v.findViewById(R.id.order_details_total_price);
         orderUserName.setText(this.order.getUsername());
