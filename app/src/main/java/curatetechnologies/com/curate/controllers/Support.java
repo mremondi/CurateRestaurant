@@ -22,7 +22,6 @@ public class Support extends Fragment {
         View v = inflater.inflate(R.layout.fragment_support, container, false);
 
         getActivity().setTitle("Support");
-        // TODO: what settings are needed?
 
         return v;
     }
