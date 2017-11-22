@@ -24,7 +24,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="NavHeaderTheme" parent="AppTheme">
-        <item name="android:background">@color/greyLight</item>
+        <item name="android:background">@color/greyDark</item>
         <item name="android:textColor">@color/white</item>
     </style>
 </resources>
