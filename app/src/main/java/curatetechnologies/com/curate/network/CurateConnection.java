@@ -14,9 +14,11 @@ public class CurateConnection {
 
     public static CurateAPI setUpRetrofit(){
 
+        Gson gson = new GsonBuilder().setLenient().create();
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://guarded-caverns-87227.herokuapp.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://ebb66d0f.ngrok.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(CurateAPI.class);
     }

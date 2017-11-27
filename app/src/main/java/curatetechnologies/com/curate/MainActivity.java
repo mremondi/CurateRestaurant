@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,11 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.facebook.FacebookSdk;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import curatetechnologies.com.curate.controllers.AboutUs;
 import curatetechnologies.com.curate.controllers.CompletedOrders;
@@ -43,7 +40,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     String restaurantID;
 
-    private final CurateAPI craveAPI = CurateConnection.setUpRetrofit();
+    private final CurateAPI curateAPI = CurateConnection.setUpRetrofit();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,22 +78,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final TextView username = (TextView) navHeader.findViewById(R.id.username);
 
         SharedPreferences prefs = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
+        restaurantID = prefs.getString("restaurantID", "");
 
-        Call<Restaurant> restaurantQuery = craveAPI.getRestaurantById(restaurantID);
+        Call<Restaurant> restaurantQuery = curateAPI.getRestaurantById(restaurantID);
         restaurantQuery.enqueue(new Callback<Restaurant>() {
             @Override
             public void onResponse(Call<Restaurant> call, final Response<Restaurant> response) {
                 if (response.body() != null) {
-                    restaurantName.setText(response.body().getRestaurantName());
+                    restaurantName.setText(response.body().getName());
                     username.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                    Glide.with(activity).load(response.body().getRestaurant_logo_URL()).into(ivRestaurantLogo);
+                    Glide.with(activity).load(response.body().getLogoURL()).into(ivRestaurantLogo);
                 }
             }
 
             @Override
             public void onFailure(Call<Restaurant> call, Throwable t) {
-                Log.d("FAILURE", t.getMessage());
+                Log.d("URL", call.request().url().toString());
+                Log.d("FAILURE1", t.getMessage());
             }
         });
     }

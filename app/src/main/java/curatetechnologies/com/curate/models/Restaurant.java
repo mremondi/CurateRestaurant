@@ -3,75 +3,93 @@ package curatetechnologies.com.curate.models;
 /**
  * Created by mremondi on 10/9/17.
  */
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 
 public class Restaurant{
-    private String _id;
-    private String restaurant;
-    private String restaurant_description;
-    private String restaurant_URL;
-    private String restaurant_logo_URL;
-    private String phone_number;
+
+    @SerializedName("ID")
+    @Expose
+    private Integer iD;
+    @SerializedName("Name")
+    @Expose
+    private String name;
+    @SerializedName("Description")
+    @Expose
+    private String description;
+    @SerializedName("URL")
+    @Expose
+    private String uRL;
+    @SerializedName("HoursOfOperations")
+    @Expose
+    private Object hoursOfOperations;
+    @SerializedName("Address")
+    @Expose
     private String address;
+    @SerializedName("Zipcode")
+    @Expose
     private String zipcode;
-    private String[] tags;
-    private String[] menus;
-    private Loc loc;
+    @SerializedName("Coordinates")
+    @Expose
+    private Coordinates coordinates;
+    @SerializedName("CuisineTags")
+    @Expose
+    private String cuisineTags;
+    @SerializedName("PhoneNumber")
+    @Expose
+    private String phoneNumber;
+    @SerializedName("LogoURL")
+    @Expose
+    private String logoURL;
+    @SerializedName("NumberOfItemRatings")
+    @Expose
+    private Integer numberOfItemRatings;
+    @SerializedName("SumOfItemRatings")
+    @Expose
+    private Integer sumOfItemRatings;
+    @SerializedName("RestaurantManagerID")
+    @Expose
+    private Object restaurantManagerID;
 
-    public Restaurant(String _id,
-                      String restaurant,
-                      String restaurant_description,
-                      String restaurant_URL,
-                      String restaurant_logo_URL,
-                      String phone_number,
-                      String address,
-                      String zipcode,
-                      String[] tags,
-                      String[] menus,
-                      Loc loc) {
-        this._id = _id;
-        this.restaurant = restaurant;
-        this.restaurant_description = restaurant_description;
-        this.restaurant_URL = restaurant_URL;
-        this.restaurant_logo_URL = restaurant_logo_URL;
-        this.phone_number = phone_number;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.tags = tags;
-        this.menus = menus;
-        this.loc = loc;
+    public Integer getID() {
+        return iD;
     }
 
-
-    public Loc getLoc() {
-        return loc;
+    public void setID(Integer iD) {
+        this.iD = iD;
     }
 
-    public void setLoc(Loc geometry) {
-        this.loc = geometry;
+    public String getName() {
+        return name;
     }
 
-    public String getObjectID() {
-        return _id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setObjectID(String objectID) {
-        this._id = objectID;
+    public String getDescription() {
+        return description;
     }
 
-    public String getRestaurantName() {
-        return restaurant;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setRestaurantName(String name) {
-        this.restaurant = name;
+    public String getURL() {
+        return uRL;
     }
 
-    public String getRestaurant_description() {
-        return restaurant_description;
+    public void setURL(String uRL) {
+        this.uRL = uRL;
     }
 
-    public void setRestaurant_description(String restaurant_description) {
-        this.restaurant_description = restaurant_description;
+    public Object getHoursOfOperations() {
+        return hoursOfOperations;
+    }
+
+    public void setHoursOfOperations(Object hoursOfOperations) {
+        this.hoursOfOperations = hoursOfOperations;
     }
 
     public String getAddress() {
@@ -90,45 +108,60 @@ public class Restaurant{
         this.zipcode = zipcode;
     }
 
-    public String[] getTags() {
-        return tags;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    public void setTags(String[] tags) {
-        this.tags = tags;
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
-    public String getRestaurant_URL() {
-        return restaurant_URL;
+    public String getCuisineTags() {
+        return cuisineTags;
     }
 
-    public void setRestaurant_URL(String restaurant_URL) {
-        this.restaurant_URL = restaurant_URL;
+    public void setCuisineTags(String cuisineTags) {
+        this.cuisineTags = cuisineTags;
     }
 
-    public String[] getMenus() {
-        return menus;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setMenus(String[] menus) {
-        this.menus = menus;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-
-    public String getRestaurant_logo_URL() {
-        return restaurant_logo_URL;
+    public String getLogoURL() {
+        return logoURL;
     }
 
-    public void setRestaurant_logo_URL(String restaurant_logo_URL) {
-        this.restaurant_logo_URL = restaurant_logo_URL;
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public Integer getNumberOfItemRatings() {
+        return numberOfItemRatings;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setNumberOfItemRatings(Integer numberOfItemRatings) {
+        this.numberOfItemRatings = numberOfItemRatings;
+    }
+
+    public Integer getSumOfItemRatings() {
+        return sumOfItemRatings;
+    }
+
+    public void setSumOfItemRatings(Integer sumOfItemRatings) {
+        this.sumOfItemRatings = sumOfItemRatings;
+    }
+
+    public Object getRestaurantManagerID() {
+        return restaurantManagerID;
+    }
+
+    public void setRestaurantManagerID(Object restaurantManagerID) {
+        this.restaurantManagerID = restaurantManagerID;
     }
 
 }
