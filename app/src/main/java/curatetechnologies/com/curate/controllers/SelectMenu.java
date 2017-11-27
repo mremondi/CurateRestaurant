@@ -56,7 +56,7 @@ public class SelectMenu extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Menu>> call, Throwable t) {
-                Log.d("FAILURE", t.getMessage());
+                Log.d("FAILURE", "Message " + t.getMessage());
             }
         });
 

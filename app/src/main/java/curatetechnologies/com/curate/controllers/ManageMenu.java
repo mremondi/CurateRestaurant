@@ -39,11 +39,11 @@ public class ManageMenu extends Fragment{
         getActivity().setTitle("Manage Menu");
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
-        Call<Menu> call = api.getMenuById("1");
+        Call<Menu> call = api.getMenuById(menuId);
         call.enqueue(new Callback<Menu>() {
             @Override
             public void onResponse(Call<Menu> call, Response<Menu> response) {
-                Log.d("MENU LOADED", response.body().getMenuName());
+                Log.d("MENU LOADED", response.body().getMenuSections().get(0).getSection());
             }
 
             @Override
