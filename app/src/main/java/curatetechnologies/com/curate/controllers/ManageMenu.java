@@ -25,6 +25,8 @@ import retrofit2.Response;
 
 public class ManageMenu extends Fragment{
 
+    int menuId;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
@@ -34,11 +36,10 @@ public class ManageMenu extends Fragment{
         // Todo: load all of the menu's items
         // Todo: allow the restaurant to hide specific items
 
-        Log.d("HERE", "IN MANAGEMENU");
+        getActivity().setTitle("Manage Menu");
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
         Call<Menu> call = api.getMenuById("1");
-        Log.d("URL", call.request().url().toString());
         call.enqueue(new Callback<Menu>() {
             @Override
             public void onResponse(Call<Menu> call, Response<Menu> response) {
@@ -51,5 +52,9 @@ public class ManageMenu extends Fragment{
             }
         });
         return v;
+    }
+
+    public void setMenuId(int id){
+        this.menuId = id;
     }
 }

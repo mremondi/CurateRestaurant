@@ -39,10 +39,7 @@ public class SelectMenu extends Fragment {
         final RecyclerView menuRecyclerView = v.findViewById(R.id.selectMenuRecyclerView);
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        getActivity().setTitle("Manage Menus");
-
-        // Todo: load all of the restaurant's menus
-        // Todo: allow the restaurant user to select which menu is active?
+        getActivity().setTitle("Select Menu");
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
