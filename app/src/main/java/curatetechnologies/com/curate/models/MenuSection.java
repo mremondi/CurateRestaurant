@@ -9,10 +9,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class MenuSection {
 
-    @SerializedName("Section")
+    @SerializedName("MenuSection_Section")
     @Expose
     private String section;
-    @SerializedName("MenuSectionID")
+    @SerializedName("MenuSection_MenuSectionID")
     @Expose
     private Integer menuSectionID;
 

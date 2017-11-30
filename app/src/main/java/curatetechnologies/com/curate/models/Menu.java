@@ -10,13 +10,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class Menu {
 
-    @SerializedName("MenuID")
+    @SerializedName("Menu_ID")
     @Expose
     private Integer menuID;
-    @SerializedName("MenuName")
+    @SerializedName("Menu_Name")
     @Expose
     private String menuName;
-    @SerializedName("RestaurantID")
+    @SerializedName("Menu_RestaurantID")
     @Expose
     private Integer restaurantID;
     @SerializedName("MenuSections")

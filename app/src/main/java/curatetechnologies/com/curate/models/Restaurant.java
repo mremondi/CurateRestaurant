@@ -9,46 +9,46 @@ import com.google.gson.annotations.SerializedName;
 
 public class Restaurant{
 
-    @SerializedName("ID")
+    @SerializedName("Restaurant_ID")
     @Expose
     private Integer iD;
-    @SerializedName("Name")
+    @SerializedName("Restaurant_Name")
     @Expose
     private String name;
-    @SerializedName("Description")
+    @SerializedName("Restaurant_Description")
     @Expose
     private String description;
-    @SerializedName("URL")
+    @SerializedName("Restaurant_URL")
     @Expose
     private String uRL;
-    @SerializedName("HoursOfOperations")
+    @SerializedName("Restaurant_HoursOfOperations")
     @Expose
     private Object hoursOfOperations;
-    @SerializedName("Address")
+    @SerializedName("Restaurant_Address")
     @Expose
     private String address;
-    @SerializedName("Zipcode")
+    @SerializedName("Restaurant_Zipcode")
     @Expose
     private String zipcode;
-    @SerializedName("Coordinates")
+    @SerializedName("Restaurant_Coordinates")
     @Expose
     private Coordinates coordinates;
-    @SerializedName("CuisineTags")
+    @SerializedName("Restaurant_CuisineTags")
     @Expose
     private String cuisineTags;
-    @SerializedName("PhoneNumber")
+    @SerializedName("Restaurant_PhoneNumber")
     @Expose
     private String phoneNumber;
-    @SerializedName("LogoURL")
+    @SerializedName("Restaurant_LogoURL")
     @Expose
     private String logoURL;
-    @SerializedName("NumberOfItemRatings")
+    @SerializedName("Restaurant_NumberOfItemRatings")
     @Expose
     private Integer numberOfItemRatings;
-    @SerializedName("SumOfItemRatings")
+    @SerializedName("Restaurant_SumOfItemRatings")
     @Expose
     private Integer sumOfItemRatings;
-    @SerializedName("RestaurantManagerID")
+    @SerializedName("Restaurant_RestaurantManagerID")
     @Expose
     private Object restaurantManagerID;
 
