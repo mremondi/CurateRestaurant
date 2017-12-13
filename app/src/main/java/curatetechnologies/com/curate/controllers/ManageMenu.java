@@ -10,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.reflect.Array;
 import java.security.acl.LastOwnerException;
+import java.util.ArrayList;
+import java.util.List;
 
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.adapters.MenuSectionAdapter;
 import curatetechnologies.com.curate.models.Menu;
+import curatetechnologies.com.curate.models.MenuItem;
 import curatetechnologies.com.curate.models.MenuSection;
 import curatetechnologies.com.curate.models.Restaurant;
 import curatetechnologies.com.curate.network.CurateAPI;
@@ -46,20 +50,25 @@ public class ManageMenu extends Fragment{
 
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
-        Call<Menu> call = api.getMenuById(menuId);
+        Call<Menu> call = api.getMenuItemsBySection(menuId);
         call.enqueue(new Callback<Menu>() {
             @Override
             public void onResponse(Call<Menu> call, Response<Menu> response) {
+                Log.d("MENU", response.body().toString());
                 getActivity().setTitle("Manage Menu: " + response.body().getMenuName());
-                Log.d("MENU LOADED", response.body().getMenuSections().get(0).getSection());
+                if (response.body() != null) {
+                    List<MenuSection> sections =  response.body().getMenuSections();
+                    if (sections != null) {
+                        Log.d("MENU LOADED", sections.get(0).getSection());
 
-                SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
+                        SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
 
-                for (MenuSection section: response.body().getMenuSections()) {
-                    sectionAdapter.addSection(new MenuSectionAdapter(section,null));
+                        for (MenuSection section : sections) {
+                            sectionAdapter.addSection(new MenuSectionAdapter(section, section.getItems()));
+                        }
+                        recyclerView.setAdapter(sectionAdapter);
+                    }
                 }
-
-                recyclerView.setAdapter(sectionAdapter);
             }
 
             @Override

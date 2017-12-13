@@ -20,6 +20,9 @@ public interface CurateAPI {
     @GET("menus")
     Call<Menu> getMenuById(@Query("menuId") int menuId);
 
+    @GET("menus_items")
+    Call<Menu> getMenuItemsBySection(@Query("menuId") int menuId);
+
     @GET("menus/forRestaurantId")
     Call<ArrayList<Menu>> getMenusForRestaurant(@Query("restaurantId") String restaurantId);
 

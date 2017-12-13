@@ -50,7 +50,7 @@ public class CurrentOrderQueue extends Fragment {
             @Override
             public void populateViewHolder(OrderQueueViewHolder holder, Order order, int position) {
                 holder.setUserName(order.getUsername());
-                holder.setOrderPrice(order.getPrice());
+                holder.setOrderPrice(order.getPrice().toString());
                 holder.setProfilePicture(order.getProfilePictureURL());
             }
 

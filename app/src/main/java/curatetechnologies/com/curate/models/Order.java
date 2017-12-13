@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Order {
 
     // Necessary fields for our server and Stripe
-    private String orderID;
-    private String userID;
-    private String restaurantID;
+    private Integer orderID;
+    private Integer userID;
+    private Integer restaurantID;
     private String restaurantName;
     private String deviceID;
     // TODO: include any stripe tokens here
 
-    private String price;
+    private Double price;
     private String timeToCompletion;
     private String startingTime;
     private String completedTime;
@@ -27,7 +27,7 @@ public class Order {
         // needed for firebase
     }
 
-    public Order(String orderID, String userID, String restaurantID, String restaurantName, String deviceID, String price, String timeToCompletion, String username, String fullName, String profilePictureURL, ArrayList<MenuItem> order_items, String instructions) {
+    public Order(Integer orderID, Integer userID, Integer restaurantID, String restaurantName, String deviceID, Double price, String timeToCompletion, String username, String fullName, String profilePictureURL, ArrayList<MenuItem> order_items, String instructions) {
         this.orderID = orderID;
         this.userID = userID;
         this.restaurantID = restaurantID;
@@ -43,19 +43,19 @@ public class Order {
 
     public String getUsername(){ return this.username; }
 
-    public String getPrice(){
+    public Double getPrice(){
         return this.price;
     }
 
-    public String getOrderID(){
+    public Integer getOrderID(){
         return this.orderID;
     }
 
-    public String getUserID(){
+    public Integer getUserID(){
         return this.userID;
     }
 
-    public String getRestaurantID(){
+    public Integer getRestaurantID(){
         return this.restaurantID;
     }
 
@@ -67,19 +67,19 @@ public class Order {
         return this.order_items;
     }
 
-    public void setOrderID(String orderID) {
+    public void setOrderID(Integer orderID) {
         this.orderID = orderID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public void setRestaurantID(String restaurantID) {
+    public void setRestaurantID(Integer restaurantID) {
         this.restaurantID = restaurantID;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

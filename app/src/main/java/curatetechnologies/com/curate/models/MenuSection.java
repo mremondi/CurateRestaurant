@@ -7,14 +7,19 @@ package curatetechnologies.com.curate.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class MenuSection {
 
-    @SerializedName("MenuSection_Section")
+    @SerializedName("MenuSection_Name")
     @Expose
     private String section;
-    @SerializedName("MenuSection_MenuSectionID")
+    @SerializedName("MenuSection_ID")
     @Expose
     private Integer menuSectionID;
+    @SerializedName("Items")
+    @Expose
+    private List<MenuItem> items;
 
     public String getSection() {
         return section;
@@ -30,6 +35,14 @@ public class MenuSection {
 
     public void setMenuSectionID(Integer menuSectionID) {
         this.menuSectionID = menuSectionID;
+    }
+
+    public List<MenuItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<MenuItem> items) {
+        this.items = items;
     }
 
 }

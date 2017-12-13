@@ -21,15 +21,14 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 public class MenuSectionAdapter extends StatelessSection {
 
     MenuSection section;
-    List<String> sectionItems = Arrays.asList("Latte", "Brewed Coffee");
-
+    List<MenuItem> sectionItems;
 
     public MenuSectionAdapter(MenuSection section, List<MenuItem> sectionItems){
         super(new SectionParameters.Builder(R.layout.section_item)
                 .headerResourceId(R.layout.section_header)
                 .build());
         this.section = section;
-        //this.sectionItems = sectionItems;
+        this.sectionItems = sectionItems;
 
     }
 
@@ -48,7 +47,7 @@ public class MenuSectionAdapter extends StatelessSection {
         MenuSectionItemViewHolder itemHolder = (MenuSectionItemViewHolder) holder;
 
         // bind your view here
-        itemHolder.itemName.setText(this.sectionItems.get(position));
+        itemHolder.itemName.setText(this.sectionItems.get(position).getItemName());
     }
 
     @Override

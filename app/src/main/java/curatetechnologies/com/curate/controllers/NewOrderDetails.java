@@ -68,7 +68,7 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
             @Override
             public void populateViewHolder(OrderDetailsViewHolder holder, MenuItem item, int position) {
                 holder.setItemName(item.getItemName());
-                holder.setItemPrice(item.getItemPrice());
+                holder.setItemPrice(item.getItemPrice().toString());
             }
 
             @Override
