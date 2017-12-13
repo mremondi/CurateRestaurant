@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 
@@ -13,13 +15,12 @@ import curatetechnologies.com.curate.R;
 
 public class OrderDetailsViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView itemName;
-    private final TextView itemPrice;
+    @BindView(R.id.order_details_row_item_name) TextView itemName;
+    @BindView(R.id.order_details_item_price) TextView itemPrice;
 
     public OrderDetailsViewHolder(final View itemView) {
         super(itemView);
-        itemName = (TextView) itemView.findViewById(R.id.order_details_row_item_name);
-        itemPrice = (TextView) itemView.findViewById(R.id.order_details_item_price);
+        ButterKnife.bind(this, itemView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

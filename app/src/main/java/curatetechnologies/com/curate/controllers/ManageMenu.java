@@ -15,6 +15,9 @@ import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.adapters.MenuSectionAdapter;
 import curatetechnologies.com.curate.models.Menu;
@@ -36,18 +39,17 @@ public class ManageMenu extends Fragment{
 
     int menuId;
 
+    Unbinder unbinder;
+
+    @BindView(R.id.manage_menu_recycler_view) RecyclerView recyclerView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
             savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_manage_menu, container, false);
-
-        // Todo: load all of the menu's items
-        // Todo: allow the restaurant to hide specific items
-
-        final RecyclerView recyclerView =  v.findViewById(R.id.manage_menu_recycler_view);
+        unbinder = ButterKnife.bind(this, v);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
         Call<Menu> call = api.getMenuItemsBySection(menuId);
@@ -77,6 +79,11 @@ public class ManageMenu extends Fragment{
             }
         });
         return v;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     public void setMenuId(int id){

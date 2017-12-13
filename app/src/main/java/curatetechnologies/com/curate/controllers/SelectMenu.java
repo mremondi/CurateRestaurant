@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.adapters.SelectMenuAdapter;
 import curatetechnologies.com.curate.models.Menu;
@@ -31,12 +34,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SelectMenu extends Fragment {
 
+    Unbinder unbinder;
+
+    @BindView(R.id.selectMenuRecyclerView) RecyclerView menuRecyclerView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
             savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_select_menu, container, false);
-        final RecyclerView menuRecyclerView = v.findViewById(R.id.selectMenuRecyclerView);
+        unbinder = ButterKnife.bind(this, v);
+
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         getActivity().setTitle("Select Menu");
@@ -62,6 +70,11 @@ public class SelectMenu extends Fragment {
 
 
         return v;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }

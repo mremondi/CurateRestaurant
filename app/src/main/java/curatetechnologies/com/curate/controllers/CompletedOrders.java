@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.models.Order;
@@ -29,12 +32,15 @@ import static android.content.Context.MODE_PRIVATE;
 public class CompletedOrders extends Fragment {
 
     FirebaseRecyclerAdapter orderQueueAdapter;
+    Unbinder unbinder;
+
+    @BindView(R.id.orderQueueRecyclerView) RecyclerView orderQueue;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_completed_orders, container, false);
-        RecyclerView orderQueue = (RecyclerView) v.findViewById(R.id.orderQueueRecyclerView);
+        unbinder = ButterKnife.bind(this, v);
         orderQueue.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         getActivity().setTitle("Completed Orders");
@@ -83,5 +89,10 @@ public class CompletedOrders extends Fragment {
 
         orderQueue.setAdapter(orderQueueAdapter);
         return v;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

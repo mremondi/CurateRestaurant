@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.ManageMenu;
 import curatetechnologies.com.curate.controllers.SelectMenu;
@@ -64,13 +66,13 @@ public class SelectMenuAdapter extends RecyclerView.Adapter<SelectMenuAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder  {
-        private TextView tvMenuName;
+        @BindView(R.id.select_menu_menu_name) TextView tvMenuName;
         private CardView view;
 
         public ViewHolder(CardView menuRowView) {
             super(menuRowView);
+            ButterKnife.bind(this, menuRowView);
             this.view = menuRowView;
-            tvMenuName = menuRowView.findViewById(R.id.select_menu_menu_name);
         }
     }
 }

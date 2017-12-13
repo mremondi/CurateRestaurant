@@ -25,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import curatetechnologies.com.curate.MainActivity;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.network.FirebaseAPI;
@@ -38,36 +41,23 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private EditText email;
-    private EditText password;
+    @BindView(R.id.login_email) EditText email;
+    @BindView(R.id.login_password) EditText password;
+    @OnClick(R.id.login_button) void loginClick(){
+        signInUser();
+    }
+    @OnClick(R.id.register_button) void registerClick(){
+        createUser();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ButterKnife.bind(this);
+
         mAuth = FirebaseAuth.getInstance();
-
-        email = (EditText) findViewById(R.id.login_email);
-        password = (EditText) findViewById(R.id.login_password);
-        Button btnLogin = (Button) findViewById(R.id.login_button);
-        Button btnRegister = (Button) findViewById(R.id.register_button);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signInUser();
-
-            }
-        });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createUser();
-            }
-        });
-
-
     }
 
     private void signInUser(){

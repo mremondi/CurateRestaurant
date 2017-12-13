@@ -15,6 +15,9 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.models.MenuItem;
@@ -29,15 +32,29 @@ public class CompletedOrderDetails extends Fragment {
         Order order;
         DatabaseReference orderRef;
 
+        Unbinder unbinder;
+
+        @BindView(R.id.order_details_profile_picture) ImageView profilePicture;
+        @BindView(R.id.order_details_full_name) TextView fullName;
+        @BindView(R.id.order_details_instructions) TextView instructions;
+        @BindView(R.id.order_details_username) TextView orderUserName;
+        @BindView(R.id.order_details_total_price)TextView orderTotalPrice;
+
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
         savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_completed_order_details, container, false);
+        unbinder = ButterKnife.bind(this, v);
 
         configureView(v);
         configureFirebase(v);
         return v;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     private void configureFirebase(View v) {
@@ -81,19 +98,16 @@ public class CompletedOrderDetails extends Fragment {
     private void configureView(View v) {
         getActivity().setTitle("Order Details");
 
-        ImageView profilePicture = (ImageView) v.findViewById(R.id.order_details_profile_picture);
+
         Glide.with(v)
                 .load(order.getProfilePictureURL())
                 .into(profilePicture);
 
-        TextView fullName = (TextView) v.findViewById(R.id.order_details_full_name);
         fullName.setText(order.getFullName());
 
-        TextView instructions = v.findViewById(R.id.order_details_instructions);
         instructions.setText(order.getInstructions());
 
-        TextView orderUserName = (TextView) v.findViewById(R.id.order_details_username);
-        TextView orderTotalPrice = (TextView) v.findViewById(R.id.order_details_total_price);
+
         orderUserName.setText(this.order.getUsername());
         orderTotalPrice.setText("$" + this.order.getPrice());
     }

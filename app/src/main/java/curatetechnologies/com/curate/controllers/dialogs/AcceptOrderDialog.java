@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import curatetechnologies.com.curate.R;
 
 /**
@@ -25,7 +29,16 @@ public class AcceptOrderDialog extends DialogFragment {
         public void onCancelClick();
     }
 
-    private Spinner spinner;
+    Unbinder unbinder;
+
+
+    @BindView(R.id.wait_time_spinner) Spinner spinner;
+    @OnClick(R.id.btn_accept_wait_time) void acceptWaitTime(){
+        mListener.onPositiveClick(spinner.getSelectedItem().toString());
+    }
+    @OnClick(R.id.btn_cancel_wait_time) void setCancelWaitTime(){
+        mListener.onCancelClick();
+    }
 
     AcceptOrderDialogListener mListener;
 
@@ -43,29 +56,17 @@ public class AcceptOrderDialog extends DialogFragment {
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         View v = inflater.inflate(R.layout.accept_order_dialog, null);
-        spinner = (Spinner) v.findViewById(R.id.wait_time_spinner);
-        setUpButtonListeners(v);
+
+        unbinder = ButterKnife.bind(this, v);
 
         builder.setView(v);
 
         return builder.create();
     }
 
-    private void setUpButtonListeners(View v){
-        Button acceptWaitTimeButton = (Button) v.findViewById(R.id.btn_accept_wait_time);
-        final Button cancelWaitTimeButton = (Button) v.findViewById(R.id.btn_cancel_wait_time);
-        acceptWaitTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onPositiveClick(spinner.getSelectedItem().toString());
-            }
-        });
-
-        cancelWaitTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onCancelClick();
-            }
-        });
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

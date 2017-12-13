@@ -8,6 +8,9 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.models.MenuItem;
 import curatetechnologies.com.curate.models.MenuSection;
@@ -62,39 +65,31 @@ public class MenuSectionAdapter extends StatelessSection {
         headerHolder.sectionName.setText(this.section.getSection());
     }
 
-    private class SectionHeaderViewHolder extends RecyclerView.ViewHolder {
-        private final TextView sectionName;
+    protected class SectionHeaderViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.section_header_section_name) TextView sectionName;
 
         public SectionHeaderViewHolder(View headerView){
             super(headerView);
-            sectionName = headerView.findViewById(R.id.section_header_section_name);
+            ButterKnife.bind(this, headerView);
         }
     }
 
-    private class MenuSectionItemViewHolder extends RecyclerView.ViewHolder {
-        private final TextView itemName;
-        private final Button btnHideItem;
+    protected class MenuSectionItemViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.section_item_item_name) TextView itemName;
+        @OnClick(R.id.section_item_hide_item_button) void onHideItemClick(Button btnHideItem){
+            if (btnHideItem.getText().toString().equals("Hide")){
+                btnHideItem.setText("Unhide");
+                btnHideItem.setBackgroundColor(itemView.getResources().getColor(R.color.primaryRed));
+            }
+            else {
+                btnHideItem.setText("Hide");
+                btnHideItem.setBackgroundColor(itemView.getResources().getColor(R.color.greenPastel));
+            }
+        }
 
         public MenuSectionItemViewHolder(final View itemView) {
             super(itemView);
-
-            itemName = itemView.findViewById(R.id.section_item_item_name);
-            btnHideItem = itemView.findViewById(R.id.section_item_hide_item_button);
-
-            btnHideItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: make a call to the API that makes the menu item hidden
-                    if (btnHideItem.getText().toString().equals("Hide")){
-                        btnHideItem.setText("Unhide");
-                        btnHideItem.setBackgroundColor(itemView.getResources().getColor(R.color.primaryRed));
-                    }
-                    else {
-                        btnHideItem.setText("Hide");
-                        btnHideItem.setBackgroundColor(itemView.getResources().getColor(R.color.greenPastel));
-                    }
-                }
-            });
+            ButterKnife.bind(this, itemView);
         }
     }
 }
