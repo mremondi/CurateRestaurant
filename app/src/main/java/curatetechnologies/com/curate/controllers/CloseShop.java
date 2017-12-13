@@ -11,6 +11,7 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import curatetechnologies.com.curate.R;
 
 /**
@@ -20,6 +21,8 @@ import curatetechnologies.com.curate.R;
 public class CloseShop extends Fragment {
 
     boolean isOpen = true;
+
+    private Unbinder unbinder;
 
     @BindView(R.id.close_shop_btn) Button btnCloseShop;
     @OnClick(R.id.close_shop_btn) void openCloseShop(){
@@ -41,10 +44,15 @@ public class CloseShop extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
             savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_close_shop, container, false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
 
 
         return v;
 
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
