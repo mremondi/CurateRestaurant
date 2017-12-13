@@ -23,12 +23,12 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
 import curatetechnologies.com.curate.controllers.AboutUs;
+import curatetechnologies.com.curate.controllers.CloseShop;
 import curatetechnologies.com.curate.controllers.CompletedOrders;
 import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
 import curatetechnologies.com.curate.controllers.LoginActivity;
 import curatetechnologies.com.curate.controllers.SelectMenu;
 import curatetechnologies.com.curate.controllers.NewOrderQueue;
-import curatetechnologies.com.curate.controllers.Settings;
 import curatetechnologies.com.curate.controllers.Support;
 import curatetechnologies.com.curate.models.Restaurant;
 import curatetechnologies.com.curate.network.CurateAPI;
@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.manage_menu){
             fragment = new SelectMenu();
         }
-        else if (id == R.id.settings){
-            fragment = new Settings();
+        else if (id == R.id.close_shop){
+            fragment = new CloseShop();
         }
         else if (id == R.id.contact_us){
             fragment = new Support();

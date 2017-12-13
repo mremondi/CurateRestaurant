@@ -25,11 +25,6 @@
     <group
         android:id="@+id/bottom_menu" android:checkableBehavior="single">
         <item
-            android:id="@+id/settings"
-            android:icon="@drawable/ic_settings_white_24dp"
-            android:title="Settings"/>
-
-        <item
             android:id="@+id/contact_us"
             android:icon="@drawable/ic_phone_white_24dp"
             android:title="Support"/>
@@ -38,6 +33,10 @@
             android:id="@+id/about_us"
             android:icon="@drawable/ic_info_outline_white_24dp"
             android:title="About Us"/>
+        <item
+            android:id="@+id/close_shop"
+            android:icon="@drawable/ic_closed_white_24dp"
+            android:title="Close Shop"/>
         <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_logout_white_24dp"
