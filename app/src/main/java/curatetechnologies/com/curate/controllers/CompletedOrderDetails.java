@@ -21,6 +21,7 @@ import butterknife.Unbinder;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.models.Curate.CurateMenuItem;
+import curatetechnologies.com.curate.models.Firebase.FirebaseMenuItem;
 import curatetechnologies.com.curate.models.Firebase.FirebaseOrder;
 import curatetechnologies.com.curate.network.FirebaseAPI;
 
@@ -63,13 +64,13 @@ public class CompletedOrderDetails extends Fragment {
 
         DatabaseReference ref = FirebaseAPI.SHARED.getOrderItemsRef(orderRef);
 
-        itemRowAdapter = new FirebaseRecyclerAdapter<CurateMenuItem, OrderDetailsViewHolder>(
-                CurateMenuItem.class,
+        itemRowAdapter = new FirebaseRecyclerAdapter<FirebaseMenuItem, OrderDetailsViewHolder>(
+                FirebaseMenuItem.class,
                 R.layout.order_details_item_row,
                 OrderDetailsViewHolder.class,
                 ref) {
             @Override
-            public void populateViewHolder(OrderDetailsViewHolder holder, CurateMenuItem item, int position) {
+            public void populateViewHolder(OrderDetailsViewHolder holder, FirebaseMenuItem item, int position) {
                 holder.setItemName(item.getItemName());
             }
 
