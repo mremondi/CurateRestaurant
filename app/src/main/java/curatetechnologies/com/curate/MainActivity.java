@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import curatetechnologies.com.curate.controllers.AboutUs;
 import curatetechnologies.com.curate.controllers.CloseShop;
 import curatetechnologies.com.curate.controllers.CompletedOrders;
@@ -30,7 +32,7 @@ import curatetechnologies.com.curate.controllers.LoginActivity;
 import curatetechnologies.com.curate.controllers.SelectMenu;
 import curatetechnologies.com.curate.controllers.NewOrderQueue;
 import curatetechnologies.com.curate.controllers.Support;
-import curatetechnologies.com.curate.models.Restaurant;
+import curatetechnologies.com.curate.models.Curate.CurateRestaurant;
 import curatetechnologies.com.curate.network.CurateAPI;
 import curatetechnologies.com.curate.network.CurateConnection;
 import retrofit2.Call;
@@ -42,16 +44,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private final CurateAPI curateAPI = CurateConnection.setUpRetrofit();
 
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;
+    @BindView(R.id.nav_view) NavigationView navigationView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_drawer_layout);
 
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawer.setDrawerListener(toggle);
@@ -67,23 +72,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void configureNavView() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+
         View navHeader = navigationView.getHeaderView(0);
 
-        final AppCompatActivity activity = this;
+        final ImageView ivRestaurantLogo = navHeader.findViewById(R.id.restaurant_logo);
+        final TextView restaurantName = navHeader.findViewById(R.id.restaurant_name);
+        final TextView username = navHeader.findViewById(R.id.username);
 
-        final ImageView ivRestaurantLogo = (ImageView) navHeader.findViewById(R.id.restaurant_logo);
-        final TextView restaurantName = (TextView) navHeader.findViewById(R.id.restaurant_name);
-        final TextView username = (TextView) navHeader.findViewById(R.id.username);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        final AppCompatActivity activity = this;
 
         SharedPreferences prefs = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
         restaurantID = prefs.getString("restaurantID", "");
 
-        Call<Restaurant> restaurantQuery = curateAPI.getRestaurantById(restaurantID);
-        restaurantQuery.enqueue(new Callback<Restaurant>() {
+        Call<CurateRestaurant> restaurantQuery = curateAPI.getRestaurantById(restaurantID);
+        restaurantQuery.enqueue(new Callback<CurateRestaurant>() {
             @Override
-            public void onResponse(Call<Restaurant> call, final Response<Restaurant> response) {
+            public void onResponse(Call<CurateRestaurant> call, final Response<CurateRestaurant> response) {
                 if (response.body() != null) {
                     restaurantName.setText(response.body().getName());
                     username.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             @Override
-            public void onFailure(Call<Restaurant> call, Throwable t) {
+            public void onFailure(Call<CurateRestaurant> call, Throwable t) {
                 Log.d("URL", call.request().url().toString());
                 Log.d("FAILURE1", t.getMessage());
             }
@@ -161,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

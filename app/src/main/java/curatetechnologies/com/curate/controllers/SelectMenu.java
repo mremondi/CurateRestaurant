@@ -12,14 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.adapters.SelectMenuAdapter;
-import curatetechnologies.com.curate.models.Menu;
+import curatetechnologies.com.curate.models.Curate.CurateMenu;
 import curatetechnologies.com.curate.network.CurateAPI;
 import curatetechnologies.com.curate.network.CurateConnection;
 import retrofit2.Call;
@@ -47,23 +46,23 @@ public class SelectMenu extends Fragment {
 
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        getActivity().setTitle("Select Menu");
+        getActivity().setTitle("Select CurateMenu");
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
         String restaurantID = prefs.getString("restaurantID", "");
-        Call<ArrayList<Menu>> call = api.getMenusForRestaurant(restaurantID);
+        Call<ArrayList<CurateMenu>> call = api.getMenusForRestaurant(restaurantID);
 
-        call.enqueue(new Callback<ArrayList<Menu>>() {
+        call.enqueue(new Callback<ArrayList<CurateMenu>>() {
             @Override
-            public void onResponse(Call<ArrayList<Menu>> call, Response<ArrayList<Menu>> response) {
+            public void onResponse(Call<ArrayList<CurateMenu>> call, Response<ArrayList<CurateMenu>> response) {
                 if (response.body() != null) {
                     menuRecyclerView.setAdapter(new SelectMenuAdapter(response.body()));
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Menu>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<CurateMenu>> call, Throwable t) {
                 Log.d("FAILURE", "Message " + t.getMessage());
             }
         });

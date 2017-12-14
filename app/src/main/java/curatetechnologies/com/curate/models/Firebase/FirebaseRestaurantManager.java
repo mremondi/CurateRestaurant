@@ -1,17 +1,17 @@
-package curatetechnologies.com.curate.models;
+package curatetechnologies.com.curate.models.Firebase;
 
 /**
  * Created by mremondi on 10/10/17.
  */
 
-public class Manager {
+public class FirebaseRestaurantManager {
 
     private String email;
     private String restaurantID;
 
-    public Manager(){}
+    public FirebaseRestaurantManager(){}
 
-    public Manager(String email, String restaurantID){
+    public FirebaseRestaurantManager(String email, String restaurantID){
         this.email = email;
         this.restaurantID = restaurantID;
     }

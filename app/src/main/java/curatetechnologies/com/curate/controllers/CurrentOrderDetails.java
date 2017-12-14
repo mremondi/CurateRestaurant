@@ -24,8 +24,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
-import curatetechnologies.com.curate.models.MenuItem;
-import curatetechnologies.com.curate.models.Order;
+import curatetechnologies.com.curate.models.Curate.CurateMenuItem;
+import curatetechnologies.com.curate.models.Firebase.FirebaseOrder;
 import curatetechnologies.com.curate.network.FirebaseAPI;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -38,7 +38,7 @@ public class CurrentOrderDetails extends Fragment {
 
     FirebaseRecyclerAdapter itemRowAdapter;
 
-    Order order;
+    FirebaseOrder firebaseOrder;
     DatabaseReference orderRef;
 
     Unbinder unbinder;
@@ -65,8 +65,8 @@ public class CurrentOrderDetails extends Fragment {
         unbinder.unbind();
     }
 
-    public void setOrder(Order order){
-        this.order = order;
+    public void setFirebaseOrder(FirebaseOrder firebaseOrder){
+        this.firebaseOrder = firebaseOrder;
     }
 
     public void setOrderRef(DatabaseReference orderRef){
@@ -79,13 +79,13 @@ public class CurrentOrderDetails extends Fragment {
 
         DatabaseReference ref = FirebaseAPI.SHARED.getOrderItemsRef(orderRef);
 
-        itemRowAdapter = new FirebaseRecyclerAdapter<MenuItem, OrderDetailsViewHolder>(
-                MenuItem.class,
+        itemRowAdapter = new FirebaseRecyclerAdapter<CurateMenuItem, OrderDetailsViewHolder>(
+                CurateMenuItem.class,
                 R.layout.order_details_item_row,
                 OrderDetailsViewHolder.class,
                 ref) {
             @Override
-            public void populateViewHolder(OrderDetailsViewHolder holder, MenuItem item, int position) {
+            public void populateViewHolder(OrderDetailsViewHolder holder, CurateMenuItem item, int position) {
                 holder.setItemName(item.getItemName());
             }
 
@@ -112,18 +112,18 @@ public class CurrentOrderDetails extends Fragment {
     }
 
     private void configureView(View v) {
-        getActivity().setTitle("Order Details");
+        getActivity().setTitle("FirebaseOrder Details");
 
         Glide.with(v)
-                .load(order.getProfilePictureURL())
+                .load(firebaseOrder.getProfilePictureURL())
                 .into(profilePicture);
 
-        fullName.setText(order.getFullName());
+        fullName.setText(firebaseOrder.getFullName());
 
-        instructions.setText(order.getInstructions());
+        instructions.setText(firebaseOrder.getInstructions());
 
-        orderUserName.setText(this.order.getUsername());
-        orderTotalPrice.setText("$" + this.order.getPrice());
+        orderUserName.setText(this.firebaseOrder.getUsername());
+        orderTotalPrice.setText("$" + this.firebaseOrder.getPrice());
 
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
         final String restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value
@@ -131,9 +131,9 @@ public class CurrentOrderDetails extends Fragment {
         btnCompleteOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                order.setCompletedTime("" + System.currentTimeMillis());
-                FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(restaurantID, orderRef, order);
-                FirebaseAPI.SHARED.saveOrderHistory(orderRef, order);
+                firebaseOrder.setCompletedTime("" + System.currentTimeMillis());
+                FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(restaurantID, orderRef, firebaseOrder);
+                FirebaseAPI.SHARED.saveOrderHistory(orderRef, firebaseOrder);
 
                 CurrentOrderQueue currentOrderQueue = new CurrentOrderQueue();
 

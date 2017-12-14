@@ -10,9 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Array;
-import java.security.acl.LastOwnerException;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -20,10 +17,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.adapters.MenuSectionAdapter;
-import curatetechnologies.com.curate.models.Menu;
-import curatetechnologies.com.curate.models.MenuItem;
-import curatetechnologies.com.curate.models.MenuSection;
-import curatetechnologies.com.curate.models.Restaurant;
+import curatetechnologies.com.curate.models.Curate.CurateMenu;
+import curatetechnologies.com.curate.models.Curate.CurateMenuSection;
 import curatetechnologies.com.curate.network.CurateAPI;
 import curatetechnologies.com.curate.network.CurateConnection;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
@@ -52,20 +47,20 @@ public class ManageMenu extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
-        Call<Menu> call = api.getMenuItemsBySection(menuId);
-        call.enqueue(new Callback<Menu>() {
+        Call<CurateMenu> call = api.getMenuItemsBySection(menuId);
+        call.enqueue(new Callback<CurateMenu>() {
             @Override
-            public void onResponse(Call<Menu> call, Response<Menu> response) {
+            public void onResponse(Call<CurateMenu> call, Response<CurateMenu> response) {
                 Log.d("MENU", response.body().toString());
-                getActivity().setTitle("Manage Menu: " + response.body().getMenuName());
+                getActivity().setTitle("Manage CurateMenu: " + response.body().getMenuName());
                 if (response.body() != null) {
-                    List<MenuSection> sections =  response.body().getMenuSections();
+                    List<CurateMenuSection> sections =  response.body().getCurateMenuSections();
                     if (sections != null) {
                         Log.d("MENU LOADED", sections.get(0).getSection());
 
                         SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
 
-                        for (MenuSection section : sections) {
+                        for (CurateMenuSection section : sections) {
                             sectionAdapter.addSection(new MenuSectionAdapter(section, section.getItems()));
                         }
                         recyclerView.setAdapter(sectionAdapter);
@@ -74,7 +69,7 @@ public class ManageMenu extends Fragment{
             }
 
             @Override
-            public void onFailure(Call<Menu> call, Throwable t) {
+            public void onFailure(Call<CurateMenu> call, Throwable t) {
                 Log.d("ERROR", t.getMessage());
             }
         });

@@ -2,15 +2,12 @@ package curatetechnologies.com.curate.controllers.adapters;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,19 +16,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.ManageMenu;
-import curatetechnologies.com.curate.controllers.SelectMenu;
-import curatetechnologies.com.curate.models.Menu;
-import retrofit2.Call;
+import curatetechnologies.com.curate.models.Curate.CurateMenu;
 
 /**
  * Created by mremondi on 11/27/17.
  */
 
 public class SelectMenuAdapter extends RecyclerView.Adapter<SelectMenuAdapter.ViewHolder> {
-    ArrayList<Menu> menus;
+    ArrayList<CurateMenu> curateMenus;
 
-    public SelectMenuAdapter(ArrayList<Menu> menus){
-        this.menus = menus;
+    public SelectMenuAdapter(ArrayList<CurateMenu> curateMenus){
+        this.curateMenus = curateMenus;
     }
 
     @Override
@@ -43,13 +38,13 @@ public class SelectMenuAdapter extends RecyclerView.Adapter<SelectMenuAdapter.Vi
 
     @Override
     public void onBindViewHolder(SelectMenuAdapter.ViewHolder holder, final int position) {
-        holder.tvMenuName.setText(menus.get(position).getMenuName());
+        holder.tvMenuName.setText(curateMenus.get(position).getMenuName());
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ManageMenu manageMenu = new ManageMenu();
-                manageMenu.setMenuId(menus.get(position).getMenuID());
+                manageMenu.setMenuId(curateMenus.get(position).getMenuID());
 
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 FragmentManager fm = activity.getFragmentManager();
@@ -62,7 +57,7 @@ public class SelectMenuAdapter extends RecyclerView.Adapter<SelectMenuAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return this.menus.size();
+        return this.curateMenus.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder  {

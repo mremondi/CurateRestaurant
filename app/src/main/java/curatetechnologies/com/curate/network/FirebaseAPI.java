@@ -4,8 +4,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import curatetechnologies.com.curate.models.Manager;
-import curatetechnologies.com.curate.models.Order;
+import curatetechnologies.com.curate.models.Firebase.FirebaseRestaurantManager;
+import curatetechnologies.com.curate.models.Firebase.FirebaseOrder;
 
 /**
  * Created by mremondi on 9/27/17.
@@ -17,8 +17,8 @@ public enum FirebaseAPI {
 
     /** USER ROUTES **/
     public void addUserToDatabase(FirebaseUser user){
-        Manager manager = new Manager(user.getEmail(), "");
-        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).setValue(manager);
+        FirebaseRestaurantManager firebaseRestaurantManager = new FirebaseRestaurantManager(user.getEmail(), "");
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).setValue(firebaseRestaurantManager);
     }
 
     public void setRestaurantDeviceToken(String restaurantID, String refreshedToken) {
@@ -57,28 +57,28 @@ public enum FirebaseAPI {
         return orderRef.child("order_items");
     }
 
-    public void rejectNewOrder(DatabaseReference orderRef, Order order){
+    public void rejectNewOrder(DatabaseReference orderRef, FirebaseOrder firebaseOrder){
         DatabaseReference rejectedRef = getRejectedOrdersRef();
-        rejectedRef.child(orderRef.getKey()).setValue(order);
+        rejectedRef.child(orderRef.getKey()).setValue(firebaseOrder);
 
         orderRef.removeValue();
     }
 
-    public void moveNewOrderToCurrentOrder(String restaurantID, DatabaseReference orderRef, Order order){
+    public void moveNewOrderToCurrentOrder(String restaurantID, DatabaseReference orderRef, FirebaseOrder firebaseOrder){
         DatabaseReference currentOrdersRef = getCurrentOrdersRef(restaurantID);
-        currentOrdersRef.child(orderRef.getKey()).setValue(order);
+        currentOrdersRef.child(orderRef.getKey()).setValue(firebaseOrder);
 
         orderRef.removeValue();
     }
 
-    public void saveOrderHistory(DatabaseReference orderRef, Order order){
+    public void saveOrderHistory(DatabaseReference orderRef, FirebaseOrder firebaseOrder){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("order_history").child(orderRef.getKey());
-        ref.setValue(order);
+        ref.setValue(firebaseOrder);
     }
 
-    public void moveCurrentOrderToCompletedOrders(String restaurantID, DatabaseReference orderRef, Order order){
+    public void moveCurrentOrderToCompletedOrders(String restaurantID, DatabaseReference orderRef, FirebaseOrder firebaseOrder){
         DatabaseReference completedOrdersRef = getCompletedOrdersRef(restaurantID);
-        completedOrdersRef.child(orderRef.getKey()).setValue(order);
+        completedOrdersRef.child(orderRef.getKey()).setValue(firebaseOrder);
 
         orderRef.removeValue();
     }

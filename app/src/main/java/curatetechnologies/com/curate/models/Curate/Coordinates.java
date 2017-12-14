@@ -1,4 +1,4 @@
-package curatetechnologies.com.curate.models;
+package curatetechnologies.com.curate.models.Curate;
 
 /**
  * Created by mremondi on 11/27/17.

@@ -1,4 +1,4 @@
-package curatetechnologies.com.curate.models;
+package curatetechnologies.com.curate.models.Curate;
 
 /**
  * Created by mremondi on 10/1/17.
@@ -7,7 +7,7 @@ package curatetechnologies.com.curate.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MenuItem {
+public class CurateMenuItem {
 
     @SerializedName("Item_ID")
     @Expose
@@ -47,7 +47,7 @@ public class MenuItem {
     private String menuSectionName;
     @SerializedName("Restaurant_ID")
     @Expose
-    private Integer restaurantID;
+    private String restaurantID;
     @SerializedName("Restaurant_Name")
     @Expose
     private String restaurantName;
@@ -148,11 +148,11 @@ public class MenuItem {
         this.menuSectionName = menuSectionName;
     }
 
-    public Integer getRestaurantID() {
+    public String getRestaurantID() {
         return restaurantID;
     }
 
-    public void setRestaurantID(Integer restaurantID) {
+    public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
     }
 

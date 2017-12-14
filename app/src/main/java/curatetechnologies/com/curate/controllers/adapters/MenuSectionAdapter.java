@@ -5,15 +5,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import curatetechnologies.com.curate.R;
-import curatetechnologies.com.curate.models.MenuItem;
-import curatetechnologies.com.curate.models.MenuSection;
+import curatetechnologies.com.curate.models.Curate.CurateMenuItem;
+import curatetechnologies.com.curate.models.Curate.CurateMenuSection;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 
@@ -23,10 +22,10 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 
 public class MenuSectionAdapter extends StatelessSection {
 
-    MenuSection section;
-    List<MenuItem> sectionItems;
+    CurateMenuSection section;
+    List<CurateMenuItem> sectionItems;
 
-    public MenuSectionAdapter(MenuSection section, List<MenuItem> sectionItems){
+    public MenuSectionAdapter(CurateMenuSection section, List<CurateMenuItem> sectionItems){
         super(new SectionParameters.Builder(R.layout.section_item)
                 .headerResourceId(R.layout.section_header)
                 .build());

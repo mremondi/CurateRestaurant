@@ -1,4 +1,4 @@
-package curatetechnologies.com.curate.models;
+package curatetechnologies.com.curate.models.Curate;
 
 /**
  * Created by mremondi on 11/22/17.
@@ -9,7 +9,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class MenuSection {
+import curatetechnologies.com.curate.models.Curate.CurateMenuItem;
+
+public class CurateMenuSection {
 
     @SerializedName("MenuSection_Name")
     @Expose
@@ -19,7 +21,7 @@ public class MenuSection {
     private Integer menuSectionID;
     @SerializedName("Items")
     @Expose
-    private List<MenuItem> items;
+    private List<CurateMenuItem> items;
 
     public String getSection() {
         return section;
@@ -37,11 +39,11 @@ public class MenuSection {
         this.menuSectionID = menuSectionID;
     }
 
-    public List<MenuItem> getItems() {
+    public List<CurateMenuItem> getItems() {
         return items;
     }
 
-    public void setItems(List<MenuItem> items) {
+    public void setItems(List<CurateMenuItem> items) {
         this.items = items;
     }
 

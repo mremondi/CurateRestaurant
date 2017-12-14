@@ -1,18 +1,20 @@
-package curatetechnologies.com.curate.models;
+package curatetechnologies.com.curate.models.Firebase;
 
 import java.util.ArrayList;
 
-public class Order {
+import curatetechnologies.com.curate.models.Curate.CurateMenuItem;
+
+public class FirebaseOrder {
 
     // Necessary fields for our server and Stripe
-    private Integer orderID;
-    private Integer userID;
-    private Integer restaurantID;
+    private String orderID;
+    private String userID;
+    private String restaurantID;
     private String restaurantName;
     private String deviceID;
     // TODO: include any stripe tokens here
 
-    private Double price;
+    private String price;
     private String timeToCompletion;
     private String startingTime;
     private String completedTime;
@@ -21,13 +23,13 @@ public class Order {
     private String profilePictureURL;
     private String instructions;
 
-    private ArrayList<MenuItem> order_items;
+    private ArrayList<FirebaseMenuItem> order_items;
 
-    public Order(){
+    public FirebaseOrder(){
         // needed for firebase
     }
 
-    public Order(Integer orderID, Integer userID, Integer restaurantID, String restaurantName, String deviceID, Double price, String timeToCompletion, String username, String fullName, String profilePictureURL, ArrayList<MenuItem> order_items, String instructions) {
+    public FirebaseOrder(String orderID, String userID, String restaurantID, String restaurantName, String deviceID, String price, String timeToCompletion, String username, String fullName, String profilePictureURL, ArrayList<FirebaseMenuItem> order_items, String instructions) {
         this.orderID = orderID;
         this.userID = userID;
         this.restaurantID = restaurantID;
@@ -43,19 +45,19 @@ public class Order {
 
     public String getUsername(){ return this.username; }
 
-    public Double getPrice(){
+    public String getPrice(){
         return this.price;
     }
 
-    public Integer getOrderID(){
+    public String getOrderID(){
         return this.orderID;
     }
 
-    public Integer getUserID(){
+    public String getUserID(){
         return this.userID;
     }
 
-    public Integer getRestaurantID(){
+    public String getRestaurantID(){
         return this.restaurantID;
     }
 
@@ -63,23 +65,23 @@ public class Order {
         return this.timeToCompletion;
     }
 
-    public ArrayList<MenuItem> getOrder_items(){
+    public ArrayList<FirebaseMenuItem> getOrder_items(){
         return this.order_items;
     }
 
-    public void setOrderID(Integer orderID) {
+    public void setOrderID(String orderID) {
         this.orderID = orderID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public void setRestaurantID(Integer restaurantID) {
+    public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -87,7 +89,7 @@ public class Order {
         this.timeToCompletion = timeToCompletion;
     }
 
-    public void setOrder_items(ArrayList<MenuItem> order_items){
+    public void setOrder_items(ArrayList<FirebaseMenuItem> order_items){
         this.order_items = order_items;
     }
 

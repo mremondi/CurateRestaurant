@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
-import curatetechnologies.com.curate.models.Order;
+import curatetechnologies.com.curate.models.Firebase.FirebaseOrder;
 import curatetechnologies.com.curate.network.FirebaseAPI;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -51,17 +51,17 @@ public class CompletedOrders extends Fragment {
 
         final DatabaseReference ref = FirebaseAPI.SHARED.getCompletedOrdersRef(restaurantID);
 
-        orderQueueAdapter = new FirebaseRecyclerAdapter<Order, OrderQueueViewHolder>(
-                Order.class,
+        orderQueueAdapter = new FirebaseRecyclerAdapter<FirebaseOrder, OrderQueueViewHolder>(
+                FirebaseOrder.class,
                 R.layout.order_row,
                 OrderQueueViewHolder.class,
                 ref) {
 
             @Override
-            public void populateViewHolder(OrderQueueViewHolder holder, Order order, int position) {
-                holder.setUserName(order.getUsername());
-                holder.setOrderPrice(order.getPrice().toString());
-                holder.setProfilePicture(order.getProfilePictureURL());
+            public void populateViewHolder(OrderQueueViewHolder holder, FirebaseOrder firebaseOrder, int position) {
+                holder.setUserName(firebaseOrder.getUsername());
+                holder.setOrderPrice(firebaseOrder.getPrice().toString());
+                holder.setProfilePicture(firebaseOrder.getProfilePictureURL());
             }
 
             @Override
@@ -73,7 +73,7 @@ public class CompletedOrders extends Fragment {
                         CompletedOrderDetails completedOrderDetails = new CompletedOrderDetails();
 
                         completedOrderDetails.setOrderRef(orderQueueAdapter.getRef(position));
-                        completedOrderDetails.setOrder((Order) orderQueueAdapter.getItem(position));
+                        completedOrderDetails.setFirebaseOrder((FirebaseOrder) orderQueueAdapter.getItem(position));
 
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
