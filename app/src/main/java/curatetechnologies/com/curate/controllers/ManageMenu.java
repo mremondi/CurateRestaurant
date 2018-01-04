@@ -47,14 +47,15 @@ public class ManageMenu extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
-        Call<CurateMenu> call = api.getMenuItemsBySection(menuId);
-        call.enqueue(new Callback<CurateMenu>() {
+        Call<CurateMenu[]> call = api.getMenuItemsBySection(menuId);
+        call.enqueue(new Callback<CurateMenu[]>() {
             @Override
-            public void onResponse(Call<CurateMenu> call, Response<CurateMenu> response) {
+            public void onResponse(Call<CurateMenu[]> call, Response<CurateMenu[]> response) {
                 Log.d("MENU", response.body().toString());
-                getActivity().setTitle("Manage CurateMenu: " + response.body().getMenuName());
+                CurateMenu menu = response.body()[0];
+                getActivity().setTitle("Manage Menu: " + menu.getMenuName());
                 if (response.body() != null) {
-                    List<CurateMenuSection> sections =  response.body().getCurateMenuSections();
+                    List<CurateMenuSection> sections =  menu.getCurateMenuSections();
                     if (sections != null) {
                         Log.d("MENU LOADED", sections.get(0).getSection());
 
@@ -69,7 +70,7 @@ public class ManageMenu extends Fragment{
             }
 
             @Override
-            public void onFailure(Call<CurateMenu> call, Throwable t) {
+            public void onFailure(Call<CurateMenu[]> call, Throwable t) {
                 Log.d("ERROR", t.getMessage());
             }
         });

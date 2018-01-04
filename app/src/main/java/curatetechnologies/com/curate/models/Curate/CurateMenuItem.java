@@ -51,6 +51,9 @@ public class CurateMenuItem {
     @SerializedName("Restaurant_Name")
     @Expose
     private String restaurantName;
+    @SerializedName("Item_Available")
+    @Expose
+    private boolean available;
 
     public Integer getItemID() {
         return itemID;
@@ -162,5 +165,14 @@ public class CurateMenuItem {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+
+    public boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

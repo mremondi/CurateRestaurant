@@ -86,19 +86,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences prefs = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
         restaurantID = prefs.getString("restaurantID", "");
 
-        Call<CurateRestaurant> restaurantQuery = curateAPI.getRestaurantById(restaurantID);
-        restaurantQuery.enqueue(new Callback<CurateRestaurant>() {
+        Call<CurateRestaurant[]> restaurantQuery = curateAPI.getRestaurantById(restaurantID);
+        restaurantQuery.enqueue(new Callback<CurateRestaurant[]>() {
             @Override
-            public void onResponse(Call<CurateRestaurant> call, final Response<CurateRestaurant> response) {
+            public void onResponse(Call<CurateRestaurant[]> call, final Response<CurateRestaurant[]> response) {
                 if (response.body() != null) {
-                    restaurantName.setText(response.body().getName());
+                    CurateRestaurant restaurant = response.body()[0];
+                    restaurantName.setText(restaurant.getName());
                     username.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                    Glide.with(activity).load(response.body().getLogoURL()).into(ivRestaurantLogo);
+                    Glide.with(activity).load(restaurant.getLogoURL()).into(ivRestaurantLogo);
                 }
             }
 
             @Override
-            public void onFailure(Call<CurateRestaurant> call, Throwable t) {
+            public void onFailure(Call<CurateRestaurant[]> call, Throwable t) {
                 Log.d("URL", call.request().url().toString());
                 Log.d("FAILURE1", t.getMessage());
             }
