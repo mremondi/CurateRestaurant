@@ -58,6 +58,14 @@ public class MenuSectionAdapter extends StatelessSection {
         // bind your view here
         itemHolder.item = this.sectionItems.get(position);
         itemHolder.itemName.setText(this.sectionItems.get(position).getItemName());
+        if (itemHolder.item.getAvailable()){
+            itemHolder.hideItemButton.setText("Hide");
+            itemHolder.hideItemButton.setBackgroundColor(itemHolder.itemView.getResources().getColor(R.color.greenPastel));
+        }
+        else {
+            itemHolder.hideItemButton.setText("Unhide");
+            itemHolder.hideItemButton.setBackgroundColor(itemHolder.itemView.getResources().getColor(R.color.primaryRed));
+        }
     }
 
     @Override
@@ -84,6 +92,7 @@ public class MenuSectionAdapter extends StatelessSection {
     protected class MenuSectionItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.section_item_item_name) TextView itemName;
+        @BindView(R.id.section_item_hide_item_button) Button hideItemButton;
 
         CurateMenuItem item;
 

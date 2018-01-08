@@ -51,14 +51,11 @@ public class ManageMenu extends Fragment{
         call.enqueue(new Callback<CurateMenu[]>() {
             @Override
             public void onResponse(Call<CurateMenu[]> call, Response<CurateMenu[]> response) {
-                Log.d("MENU", response.body().toString());
                 CurateMenu menu = response.body()[0];
                 getActivity().setTitle("Manage Menu: " + menu.getMenuName());
                 if (response.body() != null) {
                     List<CurateMenuSection> sections =  menu.getCurateMenuSections();
                     if (sections != null) {
-                        Log.d("MENU LOADED", sections.get(0).getSection());
-
                         SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
 
                         for (CurateMenuSection section : sections) {
