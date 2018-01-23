@@ -31,4 +31,7 @@ public interface CurateAPI {
     @GET("restaurants")
     Call<CurateRestaurant[]> getRestaurantById(@Query("ids") String ids);
 
+    @POST("restaurant/setAvailability")
+    Call<Integer> setRestaurantAvailability(@Query("restaurantId") String restaurantId, @Query("isOpen") Boolean isOpen);
+
 }
