@@ -23,9 +23,6 @@ public class CurateFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyAndroidFCMService";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        //Log data to Log Cat
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
         //create notification
         createNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
     }

@@ -25,8 +25,8 @@ import curatetechnologies.com.curate.R;
 public class AcceptOrderDialog extends DialogFragment {
 
     public interface AcceptOrderDialogListener{
-        public void onPositiveClick(String waitTime);
-        public void onCancelClick();
+        void onPositiveClick(String waitTime);
+        void onCancelClick();
     }
 
     Unbinder unbinder;
@@ -56,11 +56,8 @@ public class AcceptOrderDialog extends DialogFragment {
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         View v = inflater.inflate(R.layout.accept_order_dialog, null);
-
         unbinder = ButterKnife.bind(this, v);
-
         builder.setView(v);
-
         return builder.create();
     }
 

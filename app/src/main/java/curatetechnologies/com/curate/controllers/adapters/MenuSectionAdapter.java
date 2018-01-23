@@ -76,7 +76,6 @@ public class MenuSectionAdapter extends StatelessSection {
     @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder) {
         SectionHeaderViewHolder headerHolder = (SectionHeaderViewHolder) holder;
-
         headerHolder.sectionName.setText(this.section.getSection());
     }
 

@@ -12,7 +12,6 @@ public class FirebaseOrder {
     private String restaurantID;
     private String restaurantName;
     private String deviceID;
-    // TODO: include any stripe tokens here
 
     private String price;
     private String timeToCompletion;

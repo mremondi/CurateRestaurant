@@ -60,7 +60,7 @@ public class CompletedOrders extends Fragment {
             @Override
             public void populateViewHolder(OrderQueueViewHolder holder, FirebaseOrder firebaseOrder, int position) {
                 holder.setUserName(firebaseOrder.getUsername());
-                holder.setOrderPrice(firebaseOrder.getPrice().toString());
+                holder.setOrderPrice(firebaseOrder.getPrice());
                 holder.setProfilePicture(firebaseOrder.getProfilePictureURL());
             }
 

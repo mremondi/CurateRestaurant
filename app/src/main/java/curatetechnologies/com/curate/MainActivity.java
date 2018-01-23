@@ -100,8 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onFailure(Call<CurateRestaurant[]> call, Throwable t) {
-                Log.d("URL", call.request().url().toString());
-                Log.d("FAILURE1", t.getMessage());
+                Log.d("FAILURE", t.getMessage());
             }
         });
     }

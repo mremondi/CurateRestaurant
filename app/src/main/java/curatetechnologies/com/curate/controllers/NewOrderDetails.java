@@ -28,7 +28,6 @@ import butterknife.Unbinder;
 import curatetechnologies.com.curate.OrderQueueViewHolder;
 import curatetechnologies.com.curate.R;
 import curatetechnologies.com.curate.controllers.dialogs.AcceptOrderDialog;
-import curatetechnologies.com.curate.models.Curate.CurateMenuItem;
 import curatetechnologies.com.curate.models.Firebase.FirebaseMenuItem;
 import curatetechnologies.com.curate.models.Firebase.FirebaseOrder;
 import curatetechnologies.com.curate.network.FirebaseAPI;
@@ -53,10 +52,8 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
     @BindView(R.id.order_details_accept_button) Button btnAccept;
     @BindView(R.id.order_details_reject_button) Button btnReject;
 
-
     View v;
     AcceptOrderDialog dialog;
-
 
     @Nullable
     @Override
@@ -88,16 +85,6 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
             @Override
             public OrderDetailsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 OrderDetailsViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
-                viewHolder.setOnClickListener(new OrderQueueViewHolder.ClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-//                        Fragment orderDetails = new NewOrderDetails();
-//                        FragmentManager fm = getFragmentManager();
-//                        FragmentTransaction transaction = fm.beginTransaction();
-//                        transaction.replace(R.id.content_frame, orderDetails);
-//                        transaction.commit();
-                    }
-                });
                 return viewHolder;
             }
 

@@ -70,13 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
-                                        Log.d("USER LOG", "signInWithEmail:success");
                                         final FirebaseUser user = mAuth.getCurrentUser();
                                         saveRestaurantID(user);
                                         //updateUI(user);
                                     } else {
                                         // If sign in fails, display a message to the user.
-                                        Log.w("USER LOG", "signInWithEmail:failure", task.getException());
                                         Toast.makeText(LoginActivity.this, "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
                                         updateUI(null);

@@ -78,10 +78,7 @@ public class CloseShop extends Fragment {
             savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_close_shop, container, false);
         unbinder = ButterKnife.bind(this, v);
-
-
         return v;
-
     }
 
     @Override public void onDestroyView() {

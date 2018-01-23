@@ -93,16 +93,6 @@ public class CurrentOrderDetails extends Fragment {
             @Override
             public OrderDetailsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 OrderDetailsViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
-                viewHolder.setOnClickListener(new OrderQueueViewHolder.ClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-//                        Fragment orderDetails = new NewOrderDetails();
-//                        FragmentManager fm = getFragmentManager();
-//                        FragmentTransaction transaction = fm.beginTransaction();
-//                        transaction.replace(R.id.content_frame, orderDetails);
-//                        transaction.commit();
-                    }
-                });
                 return viewHolder;
             }
 
