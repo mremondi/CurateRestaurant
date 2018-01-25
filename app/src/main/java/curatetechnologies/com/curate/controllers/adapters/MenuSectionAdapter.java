@@ -96,7 +96,6 @@ public class MenuSectionAdapter extends StatelessSection {
         CurateMenuItem item;
 
         @OnClick(R.id.section_item_hide_item_button) void onHideItemClick(Button btnHideItem){
-            Log.d("AVAILABLE", "" + item.getAvailable());
             if (item.getAvailable()){
                 btnHideItem.setText("Unhide");
                 btnHideItem.setBackgroundColor(itemView.getResources().getColor(R.color.primaryRed));

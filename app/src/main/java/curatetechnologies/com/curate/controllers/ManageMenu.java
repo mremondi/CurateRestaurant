@@ -59,7 +59,9 @@ public class ManageMenu extends Fragment{
                         SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
 
                         for (CurateMenuSection section : sections) {
-                            sectionAdapter.addSection(new MenuSectionAdapter(section, section.getItems()));
+                            if (section.getItems().get(0).getItemName() != null) {
+                                sectionAdapter.addSection(new MenuSectionAdapter(section, section.getItems()));
+                            }
                         }
                         recyclerView.setAdapter(sectionAdapter);
                     }

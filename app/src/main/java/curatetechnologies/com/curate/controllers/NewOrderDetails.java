@@ -95,7 +95,7 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
     }
 
     private void configureView(View v) {
-        getActivity().setTitle("FirebaseOrder Details");
+        getActivity().setTitle("New Order Details");
 
         Glide.with(v)
                 .load(firebaseOrder.getProfilePictureURL())
@@ -113,7 +113,7 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
             public void onClick(View view) {
                 dialog = new AcceptOrderDialog();
                 dialog.setListener(self);
-                dialog.show(getFragmentManager(), "Accept FirebaseOrder");
+                dialog.show(getFragmentManager(), "Accept Order");
             }
         });
 
@@ -121,8 +121,8 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
             @Override
             public void onClick(View view) {
                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                alertDialog.setTitle("Rejecting FirebaseOrder");
-                alertDialog.setMessage("Are you sure you want to reject this firebaseOrder?");
+                alertDialog.setTitle("Rejecting Order");
+                alertDialog.setMessage("Are you sure you want to reject this order?");
 
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                     @Override
