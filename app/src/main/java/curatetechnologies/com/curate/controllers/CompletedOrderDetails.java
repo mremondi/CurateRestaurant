@@ -59,7 +59,7 @@ public class CompletedOrderDetails extends Fragment {
     }
 
     private void configureFirebase(View v) {
-        RecyclerView orderQueue = (RecyclerView) v.findViewById(R.id.order_details_recyclerview);
+        RecyclerView orderQueue = v.findViewById(R.id.order_details_recyclerview);
         orderQueue.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         DatabaseReference ref = FirebaseAPI.SHARED.getOrderItemsRef(orderRef);
@@ -86,7 +86,7 @@ public class CompletedOrderDetails extends Fragment {
     }
 
     private void configureView(View v) {
-        getActivity().setTitle("FirebaseOrder Details");
+        getActivity().setTitle("Completed Order Details");
 
 
         Glide.with(v)

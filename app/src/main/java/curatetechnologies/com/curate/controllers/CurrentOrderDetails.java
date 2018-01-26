@@ -103,7 +103,7 @@ public class CurrentOrderDetails extends Fragment {
     }
 
     private void configureView(View v) {
-        getActivity().setTitle("FirebaseOrder Details");
+        getActivity().setTitle("Current Order Details");
 
         Glide.with(v)
                 .load(firebaseOrder.getProfilePictureURL())
