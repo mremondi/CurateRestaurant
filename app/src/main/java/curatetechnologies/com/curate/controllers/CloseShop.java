@@ -3,12 +3,20 @@ package curatetechnologies.com.curate.controllers;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 import java.util.ArrayList;
 
@@ -57,19 +65,32 @@ public class CloseShop extends Fragment {
         }
     }
 
-    private void callSetAvailability(CurateAPI api, String restaurantID) {
-        Call<Integer> call = api.setRestaurantAvailability(restaurantID, isOpen);
-        call.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Log.d("SUCCESS", "onResponse: " + response.body());
-            }
+    private void callSetAvailability(final CurateAPI api, final String restaurantID) {
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser.getIdToken(true)
+                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            String idToken = task.getResult().getToken();
+                            Call<Integer> call = api.setRestaurantAvailability(idToken, restaurantID, isOpen);
+                            call.enqueue(new Callback<Integer>() {
+                                @Override
+                                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                                    Log.d("SUCCESS", "onResponse: " + response.body());
+                                }
 
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-                Log.d("FAILURE", "onFailure: "  + t.getMessage());
-            }
-        });
+                                @Override
+                                public void onFailure(Call<Integer> call, Throwable t) {
+                                    Log.d("FAILURE", "onFailure: "  + t.getMessage());
+                                }
+                            });
+                        } else {
+                            // Handle error -> task.getException();
+                            Toast.makeText(view, "You are not authorized to make this request.", Toast.LENGTH_LONG);
+                        }
+                    }
+                });
+
     }
 
     @Nullable

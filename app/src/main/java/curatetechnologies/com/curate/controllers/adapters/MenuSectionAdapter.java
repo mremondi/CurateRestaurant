@@ -1,10 +1,17 @@
 package curatetechnologies.com.curate.controllers.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 import java.util.List;
 
@@ -101,37 +108,62 @@ public class MenuSectionAdapter extends StatelessSection {
                 btnHideItem.setBackgroundColor(itemView.getResources().getColor(R.color.primaryRed));
 
                 final CurateAPI api = CurateConnection.setUpRetrofit();
-                Call<String> call = api.setItemAvailability(item.getItemID(), false);
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Log.d("RESPONSE", "onResponse: " + response.body());
-                        item.setAvailable(false);
-                    }
+                // GET FIREBASE USER ID TOKEN
+                FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                mUser.getIdToken(true)
+                        .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                            public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                if (task.isSuccessful()) {
+                                    String idToken = task.getResult().getToken();
+                                    Call<String> call = api.setItemAvailability(idToken, item.getItemID(), false);
+                                    call.enqueue(new Callback<String>() {
+                                        @Override
+                                        public void onResponse(Call<String> call, Response<String> response) {
+                                            Log.d("RESPONSE", "onResponse: " + response.body());
+                                            item.setAvailable(false);
+                                        }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Log.d("FAILURE", t.getMessage());
-                    }
-                });
+                                        @Override
+                                        public void onFailure(Call<String> call, Throwable t) {
+                                            Log.d("FAILURE", t.getMessage());
+                                        }
+                                    });
+                                } else {
+                                    // Handle error -> task.getException();
+                                }
+                            }
+                        });
             }
             else {
                 btnHideItem.setText("Hide");
                 btnHideItem.setBackgroundColor(itemView.getResources().getColor(R.color.greenPastel));
 
                 final CurateAPI api = CurateConnection.setUpRetrofit();
-                Call<String> call = api.setItemAvailability(item.getItemID(), true);
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        item.setAvailable(true);
-                    }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
 
-                    }
-                });
+                FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                mUser.getIdToken(true)
+                        .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                            public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                if (task.isSuccessful()) {
+                                    String idToken = task.getResult().getToken();
+                                    Call<String> call = api.setItemAvailability(idToken, item.getItemID(), true);
+                                    call.enqueue(new Callback<String>() {
+                                        @Override
+                                        public void onResponse(Call<String> call, Response<String> response) {
+                                            item.setAvailable(true);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<String> call, Throwable t) {
+
+                                        }
+                                    });
+                                } else {
+                                    // Handle error -> task.getException();
+                                }
+                            }
+                        });
             }
         }
 
