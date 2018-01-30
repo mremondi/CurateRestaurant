@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -86,7 +85,7 @@ public class CloseShop extends Fragment {
                             });
                         } else {
                             // Handle error -> task.getException();
-                            Toast.makeText(view, "You are not authorized to make this request.", Toast.LENGTH_LONG);
+                            
                         }
                     }
                 });
