@@ -18,7 +18,7 @@ public class CurateConnection {
 
         Retrofit retrofit = new Retrofit.Builder()
 
-                .baseUrl("http://e88227d5.ngrok.io/api/")
+                .baseUrl("https://curate-staging.appspot.com/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(CurateAPI.class);

@@ -85,7 +85,7 @@ public class CloseShop extends Fragment {
                             });
                         } else {
                             // Handle error -> task.getException();
-                            
+
                         }
                     }
                 });

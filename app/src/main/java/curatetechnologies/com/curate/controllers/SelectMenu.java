@@ -46,7 +46,7 @@ public class SelectMenu extends Fragment {
 
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        getActivity().setTitle("Select CurateMenu");
+        getActivity().setTitle("Select Menu");
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
