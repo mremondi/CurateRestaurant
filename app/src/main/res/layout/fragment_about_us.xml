@@ -29,7 +29,29 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/about_us_curate_name"
         android:textSize="22sp"
-        android:text="Copyright 2017"/>
+        android:text="Copyright 2018"/>
+
+    <Button
+        android:id="@+id/btnTermsOfService"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Terms of Service"
+        android:textColor="@color/white"
+        android:layout_below="@+id/about_us_copyright"
+        android:layout_margin="8dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/primaryRed"/>
+
+    <Button
+        android:id="@+id/btnPrivacyPolicy"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnTermsOfService"
+        android:background="@color/primaryRed"/>
+
 
 
 
