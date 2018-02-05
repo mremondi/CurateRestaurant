@@ -15,6 +15,8 @@ repositories{
 }
 
 android {
+
+    flavorDimensions "default"
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
@@ -39,7 +41,39 @@ android {
         }
     }
     productFlavors {
+        development {
+            minSdkVersion 16
+            applicationId 'curatetechnologies.com.curate.development'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 2
+            versionName '1.0'
+
+            getProps('./src/development/config.props').each { p ->
+                buildConfigField 'String', p.key, p.value
+            }
+        }
+        production {
+            minSdkVersion 16
+            applicationId 'curatetechnologies.com.curate'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 2
+            versionName '1.0'
+
+            production {
+                getProps('./src/production/config.props').each { p ->
+                    buildConfigField 'String', p.key, p.value
+                }
+            }
+        }
     }
+}
+
+def getProps(path) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(path)))
+    return props
 }
 
 dependencies {
@@ -66,7 +100,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testCompile 'junit:junit:4.12'
-    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar'){
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true;
     }
 }

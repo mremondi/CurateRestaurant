@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class NewOrderQueue extends Fragment {
         restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
 
         final DatabaseReference ref = FirebaseAPI.SHARED.getNewOrdersRef(restaurantID);
+        Log.d("Firebase url", ref.toString());
 
         orderQueueAdapter = new FirebaseRecyclerAdapter<FirebaseOrder, OrderQueueViewHolder>(
                 FirebaseOrder.class,
