@@ -44,6 +44,7 @@ public class ChooseRestaurant extends AppCompatActivity {
         setContentView(R.layout.activity_choose_restaurant);
 
         ButterKnife.bind(this);
+        setTitle("Select Restaurant");
 
         restaurantRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

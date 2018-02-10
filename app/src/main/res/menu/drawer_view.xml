@@ -21,6 +21,11 @@
             android:icon="@drawable/ic_menu_white_24dp"
             android:title="Manage Menu" />
 
+        <item
+            android:id="@+id/switch_restaurants"
+            android:icon="@drawable/ic_compare_arrows_white_24dp"
+            android:title="Switch Restaurants"/>
+
     </group>
     <group
         android:id="@+id/bottom_menu" android:checkableBehavior="single">

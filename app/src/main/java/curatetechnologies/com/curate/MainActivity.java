@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import curatetechnologies.com.curate.controllers.AboutUs;
+import curatetechnologies.com.curate.controllers.ChooseRestaurant;
 import curatetechnologies.com.curate.controllers.CloseShop;
 import curatetechnologies.com.curate.controllers.CompletedOrders;
 import curatetechnologies.com.curate.controllers.CurrentOrderQueue;
@@ -144,6 +145,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.manage_menu){
             fragment = new SelectMenu();
+        }
+        else if (id == R.id.switch_restaurants){
+            SharedPreferences.Editor editor = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE).edit();
+            editor.clear();
+            editor.apply();
+
+            Intent i = new Intent(this, ChooseRestaurant.class);
+            startActivity(i);
+            finish();
+            return true;
         }
         else if (id == R.id.close_shop){
             fragment = new CloseShop();
