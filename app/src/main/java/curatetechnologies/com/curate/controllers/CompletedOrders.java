@@ -45,11 +45,11 @@ public class CompletedOrders extends Fragment {
 
         getActivity().setTitle("Completed Orders");
 
-        String restaurantID;
+        Integer restaurantID;
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
+        restaurantID = prefs.getInt("restaurantID", -1);//"No name defined" is the default value.
 
-        final DatabaseReference ref = FirebaseAPI.SHARED.getCompletedOrdersRef(restaurantID);
+        final DatabaseReference ref = FirebaseAPI.SHARED.getCompletedOrdersRef(String.valueOf(restaurantID));
 
         orderQueueAdapter = new FirebaseRecyclerAdapter<FirebaseOrder, OrderQueueViewHolder>(
                 FirebaseOrder.class,

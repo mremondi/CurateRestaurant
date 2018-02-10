@@ -43,11 +43,11 @@ public class NewOrderQueue extends Fragment {
 
         getActivity().setTitle("New Orders");
 
-        String restaurantID;
+        Integer restaurantID;
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
+        restaurantID = prefs.getInt("restaurantID", 0);//"No name defined" is the default value.
 
-        final DatabaseReference ref = FirebaseAPI.SHARED.getNewOrdersRef(restaurantID);
+        final DatabaseReference ref = FirebaseAPI.SHARED.getNewOrdersRef(String.valueOf(restaurantID));
         Log.d("Firebase url", ref.toString());
 
         orderQueueAdapter = new FirebaseRecyclerAdapter<FirebaseOrder, OrderQueueViewHolder>(

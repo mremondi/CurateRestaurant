@@ -42,11 +42,11 @@ public class CurrentOrderQueue extends Fragment {
 
         getActivity().setTitle("Current Orders");
 
-        String restaurantID;
+        Integer restaurantID;
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
+        restaurantID = prefs.getInt("restaurantID", -1);//"No name defined" is the default value.
 
-        final DatabaseReference ref = FirebaseAPI.SHARED.getCurrentOrdersRef(restaurantID);
+        final DatabaseReference ref = FirebaseAPI.SHARED.getCurrentOrdersRef(String.valueOf(restaurantID));
 
         orderQueueAdapter = new FirebaseRecyclerAdapter<FirebaseOrder, OrderQueueViewHolder>(
                 FirebaseOrder.class,

@@ -40,7 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    String restaurantID;
+    Integer restaurantID;
 
     private final CurateAPI curateAPI = CurateConnection.setUpRetrofit();
 
@@ -84,14 +84,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final AppCompatActivity activity = this;
 
         SharedPreferences prefs = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        restaurantID = prefs.getString("restaurantID", "");
+        restaurantID = prefs.getInt("restaurantID", -1);
 
-        Call<CurateRestaurant[]> restaurantQuery = curateAPI.getRestaurantById(restaurantID);
+        Call<CurateRestaurant[]> restaurantQuery = curateAPI.getRestaurantById(String.valueOf(restaurantID));
         restaurantQuery.enqueue(new Callback<CurateRestaurant[]>() {
             @Override
             public void onResponse(Call<CurateRestaurant[]> call, final Response<CurateRestaurant[]> response) {
                 if (response.body() != null) {
-                    CurateRestaurant restaurant = response.body()[0];
+                    CurateRestaurant restaurant = null;
+                    try {
+                        restaurant = response.body()[0];
+                    } catch (NullPointerException | ArrayIndexOutOfBoundsException e1){
+                        // ask user to login
+                        return;
+                    }
                     restaurantName.setText(restaurant.getName());
                     username.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                     Glide.with(activity).load(restaurant.getLogoURL()).into(ivRestaurantLogo);

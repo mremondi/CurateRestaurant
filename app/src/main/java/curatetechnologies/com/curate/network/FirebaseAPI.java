@@ -21,6 +21,10 @@ public enum FirebaseAPI {
         FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).setValue(firebaseRestaurantManager);
     }
 
+    public void setRestaurantIDForUser(String restaurantId, String userId){
+        FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("restaurantID").setValue(restaurantId);
+    }
+
     public void setRestaurantDeviceToken(String restaurantID, String refreshedToken) {
         FirebaseDatabase.getInstance().getReference()
                 .child("restaurants")

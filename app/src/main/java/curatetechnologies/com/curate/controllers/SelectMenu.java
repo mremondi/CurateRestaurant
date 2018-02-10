@@ -50,8 +50,8 @@ public class SelectMenu extends Fragment {
 
         final CurateAPI api = CurateConnection.setUpRetrofit();
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        String restaurantID = prefs.getString("restaurantID", "");
-        Call<ArrayList<CurateMenu>> call = api.getMenusForRestaurant(restaurantID);
+        Integer restaurantID = prefs.getInt("restaurantID", -1);
+        Call<ArrayList<CurateMenu>> call = api.getMenusForRestaurant(String.valueOf(restaurantID));
 
         call.enqueue(new Callback<ArrayList<CurateMenu>>() {
             @Override

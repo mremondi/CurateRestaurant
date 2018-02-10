@@ -163,10 +163,10 @@ public class NewOrderDetails extends Fragment implements AcceptOrderDialog.Accep
     @Override
     public void onPositiveClick(String waitTime) {
         firebaseOrder.setTimeToCompletion(waitTime);
-        String restaurantID;
+        Integer restaurantID;
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value.
-        FirebaseAPI.SHARED.moveNewOrderToCurrentOrder(restaurantID, orderRef, firebaseOrder);
+        restaurantID = prefs.getInt("restaurantID", -1);//"No name defined" is the default value.
+        FirebaseAPI.SHARED.moveNewOrderToCurrentOrder(String.valueOf(restaurantID), orderRef, firebaseOrder);
         Toast.makeText(this.getActivity(), "Wait time set: " + waitTime, Toast.LENGTH_LONG).show();
         dialog.dismiss();
 

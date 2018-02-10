@@ -47,20 +47,20 @@ public class CloseShop extends Fragment {
     @OnClick(R.id.close_shop_btn) void openCloseShop(){
         final CurateAPI api = CurateConnection.setUpRetrofit();
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        String restaurantID = prefs.getString("restaurantID", "");
+        Integer restaurantID = prefs.getInt("restaurantID", -1);
 
         if (isOpen){
             btnCloseShop.setText("Reopen");
             btnCloseShop.setBackgroundColor(getResources().getColor(R.color.greenPastel));
             this.isOpen = false;
-            callSetAvailability(api, restaurantID);
+            callSetAvailability(api, String.valueOf(restaurantID));
 
         }
         else{
             btnCloseShop.setText("Close Up");
             btnCloseShop.setBackgroundColor(getResources().getColor(R.color.primaryRed));
             this.isOpen = true;
-            callSetAvailability(api, restaurantID);
+            callSetAvailability(api, String.valueOf(restaurantID));
         }
     }
 

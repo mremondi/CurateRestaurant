@@ -117,13 +117,13 @@ public class CurrentOrderDetails extends Fragment {
         orderTotalPrice.setText("$" + this.firebaseOrder.getPrice());
 
         SharedPreferences prefs = getActivity().getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE);
-        final String restaurantID = prefs.getString("restaurantID", "");//"No name defined" is the default value
+        final int restaurantID = prefs.getInt("restaurantID", -1);//"No name defined" is the default value
 
         btnCompleteOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firebaseOrder.setCompletedTime("" + System.currentTimeMillis());
-                FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(restaurantID, orderRef, firebaseOrder);
+                FirebaseAPI.SHARED.moveCurrentOrderToCompletedOrders(String.valueOf(restaurantID), orderRef, firebaseOrder);
                 FirebaseAPI.SHARED.saveOrderHistory(orderRef, firebaseOrder);
 
                 CurrentOrderQueue currentOrderQueue = new CurrentOrderQueue();

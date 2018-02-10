@@ -17,8 +17,13 @@ public class CurateConnection {
 
         Gson gson = new GsonBuilder().setLenient().create();
 
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(BuildConfig.API_URL)
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_URL)
+                .baseUrl("https://e88227d5.ngrok.io/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(CurateAPI.class);

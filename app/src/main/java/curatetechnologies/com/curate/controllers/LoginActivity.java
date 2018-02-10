@@ -64,23 +64,22 @@ public class LoginActivity extends AppCompatActivity {
         String email = this.email.getText().toString();
         String password  = this.password.getText().toString();
         if (isEmailLegal(email) && isPasswordLegal(password)) {
-                    mAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        final FirebaseUser user = mAuth.getCurrentUser();
-                                        saveRestaurantID(user);
-                                        //updateUI(user);
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                        updateUI(null);
-                                    }
-                                }
-                            });
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                final FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+                        }
+                    });
         }
     }
 
@@ -121,12 +120,13 @@ public class LoginActivity extends AppCompatActivity {
         if (password != null && password.length() > 6){
             return true;
         }
+        Toast.makeText(this, "Your Password is too short. Make sure it is longer than 6 characters.", Toast.LENGTH_LONG).show();
         return false;
     }
 
     private void updateUI(FirebaseUser user){
         if (user != null){
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, ChooseRestaurant.class);
             startActivity(i);
             finish();
             return;
@@ -135,30 +135,4 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "An error occurred", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private void saveRestaurantID(final FirebaseUser user){
-        DatabaseReference ref = FirebaseAPI.SHARED.getUserRestaurantRef(user.getUid());
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                SharedPreferences.Editor editor = getSharedPreferences("RESTAURANT_PREFS", MODE_PRIVATE).edit();
-                String restaurantID = (String) dataSnapshot.getValue();
-                editor.putString("restaurantID", (String) dataSnapshot.getValue());
-                editor.apply();
-                updateDeviceToken(restaurantID);
-                updateUI(user);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("ERROR", databaseError.getMessage());
-            }
-        });
-    }
-
-    private void updateDeviceToken(final String restaurantID){
-        FirebaseAPI.SHARED.setRestaurantDeviceToken(restaurantID, FirebaseInstanceId.getInstance().getToken());
-    }
-
 }

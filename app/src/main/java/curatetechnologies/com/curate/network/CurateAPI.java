@@ -18,6 +18,10 @@ import retrofit2.http.Query;
 public interface CurateAPI {
 
     @Headers("api_authorization: 613f1d29-0dc9-428a-b636-794d1ce2f1a3")
+    @GET("restaurant/byManagerId")
+    Call<ArrayList<CurateRestaurant>> getRestaurantsByManagerID(@Query("managerId") String managerId);
+
+    @Headers("api_authorization: 613f1d29-0dc9-428a-b636-794d1ce2f1a3")
     @GET("menuWithItems")
     Call<CurateMenu[]> getMenuItemsBySection(@Query("menuId") int menuId);
 
@@ -31,7 +35,7 @@ public interface CurateAPI {
 
     @Headers("api_authorization: 613f1d29-0dc9-428a-b636-794d1ce2f1a3")
     @GET("restaurants")
-    Call<CurateRestaurant[]> getRestaurantById(@Query("ids") String ids);
+    Call<CurateRestaurant[]> getRestaurantById(@Query("restaurantId") String id);
 
     @Headers("api_authorization: 613f1d29-0dc9-428a-b636-794d1ce2f1a3")
     @POST("restaurant/setAvailability")
