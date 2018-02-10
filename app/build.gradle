@@ -46,7 +46,7 @@ android {
             applicationId 'curatetechnologies.com.curate.development'
             targetSdkVersion 26
             testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 3
+            versionCode 4
             versionName '1.0'
 
             getProps('./src/development/config.props').each { p ->
@@ -58,7 +58,7 @@ android {
             applicationId 'curatetechnologies.com.curate'
             targetSdkVersion 26
             testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 3
+            versionCode 4
             versionName '1.0'
 
             production {
