@@ -23,8 +23,8 @@ android {
         applicationId "curatetechnologies.com.curate"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.0"
+        versionCode 5
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -46,8 +46,8 @@ android {
             applicationId 'curatetechnologies.com.curate.development'
             targetSdkVersion 26
             testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 4
-            versionName '1.0'
+            versionCode 5
+            versionName '1.1'
 
             getProps('./src/development/config.props').each { p ->
                 buildConfigField 'String', p.key, p.value
@@ -58,8 +58,8 @@ android {
             applicationId 'curatetechnologies.com.curate'
             targetSdkVersion 26
             testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 4
-            versionName '1.0'
+            versionCode 5
+            versionName '1.1'
 
             production {
                 getProps('./src/production/config.props').each { p ->
