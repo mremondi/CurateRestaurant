@@ -21,23 +21,6 @@ public class OrderDetailsViewHolder extends RecyclerView.ViewHolder {
     public OrderDetailsViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mClickListener.onItemClick(view, getAdapterPosition());
-            }
-        });
-    }
-
-    private OrderQueueViewHolder.ClickListener mClickListener;
-
-    public interface ClickListener {
-        public void onItemClick(View view, int position);
-    }
-
-    public void setOnClickListener(OrderQueueViewHolder.ClickListener clickListener) {
-        mClickListener = clickListener;
     }
 
     public void setItemName(String itemName) {

@@ -45,6 +45,7 @@
         android:text="Instructions: "
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:background="@color/white"
         android:layout_below="@+id/order_details_full_name"/>
 
     <TextView
@@ -52,6 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
+        android:background="@color/white"
+        android:lines="2"
         android:layout_below="@+id/order_details_instructions_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>

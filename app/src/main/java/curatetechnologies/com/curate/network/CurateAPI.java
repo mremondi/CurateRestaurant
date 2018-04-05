@@ -1,7 +1,6 @@
 package curatetechnologies.com.curate.network;
 
 import java.util.ArrayList;
-
 import curatetechnologies.com.curate.models.Curate.CurateMenu;
 import curatetechnologies.com.curate.models.Curate.CurateRestaurant;
 import retrofit2.Call;
@@ -10,10 +9,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
-/**
- * Created by mremondi on 10/2/17.
- */
 
 public interface CurateAPI {
 

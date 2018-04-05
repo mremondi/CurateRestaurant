@@ -105,13 +105,21 @@ public class CurrentOrderDetails extends Fragment {
     private void configureView(View v) {
         getActivity().setTitle("Current Order Details");
 
-        Glide.with(v)
-                .load(firebaseOrder.getProfilePictureURL())
-                .into(profilePicture);
+        if (firebaseOrder.getProfilePictureURL().equals("")){
+            profilePicture.setImageDrawable(getResources().getDrawable(R.drawable.pro_pic_holder));
+        } else {
+            Glide.with(v)
+                    .load(firebaseOrder.getProfilePictureURL())
+                    .into(profilePicture);
+        }
 
         fullName.setText(firebaseOrder.getFullName());
 
-        instructions.setText(firebaseOrder.getInstructions());
+        if (firebaseOrder.getInstructions() == null){
+            instructions.setText("N/A");
+        } else {
+            instructions.setText(firebaseOrder.getInstructions());
+        }
 
         orderUserName.setText(this.firebaseOrder.getUsername());
         orderTotalPrice.setText("$" + this.firebaseOrder.getPrice());
