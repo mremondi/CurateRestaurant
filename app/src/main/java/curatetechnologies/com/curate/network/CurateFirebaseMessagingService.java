@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -24,7 +26,7 @@ public class CurateFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         //create notification
-        createNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+        createNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"));
     }
 
     private void createNotification(String title, String messageBody) {
@@ -47,5 +49,15 @@ public class CurateFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, mNotificationBuilder.build());
+
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        boolean result= Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT_WATCH&&powerManager.isInteractive()|| Build.VERSION.SDK_INT< Build.VERSION_CODES.KITKAT_WATCH&&powerManager.isScreenOn();
+
+        if (!result) {
+            PowerManager.WakeLock wl = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "MH24_SCREENLOCK");
+            wl.acquire(10000);
+            PowerManager.WakeLock wl_cpu = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MH24_SCREENLOCK");
+            wl_cpu.acquire(10000);
+        }
     }
 }
