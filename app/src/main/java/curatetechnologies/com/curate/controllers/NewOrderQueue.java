@@ -58,7 +58,11 @@ public class NewOrderQueue extends Fragment {
 
             @Override
             public void populateViewHolder(OrderQueueViewHolder holder, FirebaseOrder firebaseOrder, int position) {
-                holder.setUserName(firebaseOrder.getUsername());
+                if (firebaseOrder.getUsername().equals("") || firebaseOrder.getUsername() == null){
+                    holder.setUserName(firebaseOrder.getFullName());
+                } else {
+                    holder.setUserName(firebaseOrder.getUsername());
+                }
                 holder.setOrderPrice(firebaseOrder.getPrice());
                 holder.setProfilePicture(firebaseOrder.getProfilePictureURL());
             }
