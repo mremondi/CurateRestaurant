@@ -20,7 +20,8 @@
 
         <activity
             android:name=".controllers.LaunchScreen"
-            android:theme="@style/LaunchTheme">
+            android:theme="@style/LaunchTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,10 +30,12 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".controllers.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".network.CurateFirebaseMessagingService">
             <intent-filter>
@@ -47,7 +50,7 @@
 
         <receiver android:name=".network.CurateFirebaseMessageReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
@@ -55,7 +58,8 @@
             android:name="io.fabric.ApiKey"
             android:value="057dc69f518efa5cd394a63a1dc7224fa7664e37" />
 
-        <activity android:name=".controllers.ChooseRestaurant"></activity>
+        <activity android:name=".controllers.ChooseRestaurant"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
